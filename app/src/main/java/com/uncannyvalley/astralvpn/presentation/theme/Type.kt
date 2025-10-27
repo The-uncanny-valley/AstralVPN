@@ -1,4 +1,4 @@
-package com.uncannyvalley.astralvpn.ui.theme
+package com.uncannyvalley.astralvpn.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
