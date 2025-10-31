@@ -4,5 +4,6 @@ enum class Protocol {
     UDP,
     TCP,
     WIREGUARD,
-    OPENVPN
+    OPENVPN,
+    VLESS
 }

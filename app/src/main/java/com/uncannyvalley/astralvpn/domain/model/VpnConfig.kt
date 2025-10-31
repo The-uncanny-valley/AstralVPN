@@ -5,6 +5,6 @@ data class VpnConfig(
     val name: String,
     val endpoint: ServerEndpoint,
     val protocol: Protocol,
-    val credentials: Credentials?,
+    val auth: AuthData?,
     val isActive: Boolean = false
 )
