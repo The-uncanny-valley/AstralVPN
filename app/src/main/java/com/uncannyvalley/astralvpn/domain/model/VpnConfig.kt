@@ -8,4 +8,8 @@ data class VpnConfig(
     val auth: AuthData?,
     val splitTunneling: SplitTunnelingConfig = SplitTunnelingConfig(),
     val isActive: Boolean = false
-)
+) {
+    fun canConnect(): Boolean {
+        return endpoint.isValid() && auth?.isValid() == true
+    }
+}
