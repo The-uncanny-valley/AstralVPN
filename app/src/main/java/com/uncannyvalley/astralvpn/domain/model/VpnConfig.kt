@@ -6,5 +6,6 @@ data class VpnConfig(
     val endpoint: ServerEndpoint,
     val protocol: Protocol,
     val auth: AuthData?,
+    val splitTunneling: SplitTunnelingConfig = SplitTunnelingConfig(),
     val isActive: Boolean = false
 )
