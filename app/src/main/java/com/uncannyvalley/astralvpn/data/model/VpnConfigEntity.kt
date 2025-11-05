@@ -1,7 +1,11 @@
 package com.uncannyvalley.astralvpn.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "vpn_config")
 data class VpnConfigEntity(
-    val id: String,
+    @PrimaryKey val id: String,
     val name: String,
     val host: String,
     val port: Int,
