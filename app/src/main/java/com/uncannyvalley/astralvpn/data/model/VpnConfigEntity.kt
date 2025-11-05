@@ -14,6 +14,6 @@ data class VpnConfigEntity(
     val uuid: String?,
     val username: String?,
     val password: String?,
-    val excludedApps: Set<String>,
+    val excludedApps: String,
     val isActive: Boolean
 )

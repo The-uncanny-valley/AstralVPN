@@ -1,6 +1,5 @@
 package com.uncannyvalley.astralvpn.data.mapper
 
-import com.uncannyvalley.astralvpn.data.model.SplitTunnelingConfigEntity
 import com.uncannyvalley.astralvpn.data.model.VpnConfigEntity
 import com.uncannyvalley.astralvpn.domain.model.AuthData
 import com.uncannyvalley.astralvpn.domain.model.ConfigId
@@ -8,20 +7,6 @@ import com.uncannyvalley.astralvpn.domain.model.Protocol
 import com.uncannyvalley.astralvpn.domain.model.ServerEndpoint
 import com.uncannyvalley.astralvpn.domain.model.SplitTunnelingConfig
 import com.uncannyvalley.astralvpn.domain.model.VpnConfig
-
-fun SplitTunnelingConfigEntity.toDomain(): SplitTunnelingConfig {
-    val apps = if (excludedApps.isNotBlank()) {
-        excludedApps.split(",").toSet()
-    } else {
-        emptySet()
-    }
-    return SplitTunnelingConfig(excludedApps = apps)
-}
-
-fun SplitTunnelingConfig.toEntity(): SplitTunnelingConfigEntity {
-    val apps = excludedApps.joinToString(",")
-    return SplitTunnelingConfigEntity(excludedApps = apps)
-}
 
 fun VpnConfigEntity.toDomain(): VpnConfig {
     val endpoint = ServerEndpoint(
@@ -39,7 +24,8 @@ fun VpnConfigEntity.toDomain(): VpnConfig {
     }
 
     val splitTunneling = SplitTunnelingConfig(
-        excludedApps = excludedApps
+        excludedApps = if (excludedApps.isBlank()) emptySet()
+        else excludedApps.split(",").map { it.trim() }.filter { it.isNotBlank() }.toSet()
     )
 
     return VpnConfig(
@@ -85,7 +71,7 @@ fun VpnConfig.toEntity(): VpnConfigEntity {
         uuid = authValues.uuid,
         username = authValues.username,
         password = authValues.password,
-        excludedApps = splitTunneling.excludedApps,
+        excludedApps = splitTunneling.excludedApps.joinToString(","),
         isActive = isActive
     )
 }
