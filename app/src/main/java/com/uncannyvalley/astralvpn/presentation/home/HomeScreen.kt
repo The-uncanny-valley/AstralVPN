@@ -19,8 +19,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.uncannyvalley.astralvpn.R
+import com.uncannyvalley.astralvpn.presentation.theme.AstralVPNTheme
 
 @Composable
 fun HomeScreen(
@@ -79,6 +81,81 @@ fun MainButton(
             contentDescription = "Main action",
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Inside
+        )
+    }
+}
+
+@Preview(
+    name = "Home Screen - Normal",
+    showBackground = true
+)
+@Composable
+fun HomeScreenPreview_Normal() {
+    AstralVPNTheme(darkTheme = true) {
+        HomeScreen(
+            uiState = HomeUiState.Normal,
+            onMainButtonClick = {},
+            onNavigateSettings = {}
+        )
+    }
+}
+
+@Preview(
+    name = "Home Screen - Connecting",
+    showBackground = true
+)
+@Composable
+fun HomeScreenPreview_Connecting() {
+    AstralVPNTheme(darkTheme = true) {
+        HomeScreen(
+            uiState = HomeUiState.Connecting,
+            onMainButtonClick = {},
+            onNavigateSettings = {}
+        )
+    }
+}
+
+@Preview(
+    name = "Home Screen - Connected",
+    showBackground = true
+)
+@Composable
+fun HomeScreenPreview_Connected() {
+    AstralVPNTheme(darkTheme = true) {
+        HomeScreen(
+            uiState = HomeUiState.Connected,
+            onMainButtonClick = {},
+            onNavigateSettings = {}
+        )
+    }
+}
+
+@Preview(
+    name = "Home Screen - Error",
+    showBackground = true
+)
+@Composable
+fun HomeScreenPreview_Error() {
+    AstralVPNTheme(darkTheme = true) {
+        HomeScreen(
+            uiState = HomeUiState.Error("E"),
+            onMainButtonClick = {},
+            onNavigateSettings = {}
+        )
+    }
+}
+
+@Preview(
+    name = "Home Screen - NoInternet",
+    showBackground = true
+)
+@Composable
+fun HomeScreenPreview_NoInternet() {
+    AstralVPNTheme(darkTheme = true) {
+        HomeScreen(
+            uiState = HomeUiState.NoInternet,
+            onMainButtonClick = {},
+            onNavigateSettings = {}
         )
     }
 }
