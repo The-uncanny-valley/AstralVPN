@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.uncannyvalley.astralvpn.presentation.navigation.AstralNavHost
 import com.uncannyvalley.astralvpn.presentation.theme.AstralVPNTheme
 
 class MainActivity : ComponentActivity() {
@@ -11,7 +12,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            AstralVPNTheme { }
+            AstralVPNTheme {
+                AstralNavHost()
+            }
         }
     }
 }
