@@ -14,10 +14,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.uncannyvalley.astralvpn.R
 import com.uncannyvalley.astralvpn.presentation.home.BottomNavBar
 import com.uncannyvalley.astralvpn.presentation.navigation.Screen
+import com.uncannyvalley.astralvpn.presentation.theme.AstralVPNTheme
 
 @Composable
 fun SettingsScreen(
@@ -59,5 +61,17 @@ fun SettingsScreen(
                 contentAlignment = Alignment.Center
             ) { }
         }
+    }
+}
+
+@Preview(
+    showBackground = true
+)
+@Composable
+fun SettingsScreenPreview() {
+    AstralVPNTheme(darkTheme = true) {
+        SettingsScreen(
+            onBack = {}
+        ) { }
     }
 }
