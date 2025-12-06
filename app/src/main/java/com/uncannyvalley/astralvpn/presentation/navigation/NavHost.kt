@@ -12,7 +12,10 @@ fun AstralNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.HomeScreen.route
+        startDestination = Screen.HomeScreen.route,
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
     ) {
         composable(Screen.HomeScreen.route) {
             HomeRoute(
