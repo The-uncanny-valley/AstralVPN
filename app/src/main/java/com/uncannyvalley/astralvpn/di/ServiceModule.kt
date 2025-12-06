@@ -1,8 +1,8 @@
 package com.uncannyvalley.astralvpn.di
 
 import android.content.Context
-import com.uncannyvalley.astralvpn.VpnServiceController
-import com.uncannyvalley.astralvpn.VpnServiceControllerImpl
+import com.uncannyvalley.astralvpn.domain.VpnServiceController
+import com.uncannyvalley.astralvpn.data.service.VpnServiceControllerImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

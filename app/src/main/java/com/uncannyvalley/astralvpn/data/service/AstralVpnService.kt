@@ -1,4 +1,4 @@
-package com.uncannyvalley.astralvpn
+package com.uncannyvalley.astralvpn.data.service
 
 import android.content.Intent
 import android.net.VpnService

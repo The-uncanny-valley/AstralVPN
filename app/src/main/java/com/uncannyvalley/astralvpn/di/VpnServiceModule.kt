@@ -2,7 +2,7 @@ package com.uncannyvalley.astralvpn.di
 
 import android.content.Context
 import android.content.Intent
-import com.uncannyvalley.astralvpn.AstralVpnService
+import com.uncannyvalley.astralvpn.data.service.AstralVpnService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

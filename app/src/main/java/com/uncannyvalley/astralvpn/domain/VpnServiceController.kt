@@ -1,4 +1,4 @@
-package com.uncannyvalley.astralvpn
+package com.uncannyvalley.astralvpn.domain
 
 import com.uncannyvalley.astralvpn.domain.model.VpnConfig
 

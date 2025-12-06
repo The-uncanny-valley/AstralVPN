@@ -1,6 +1,6 @@
 package com.uncannyvalley.astralvpn.di
 
-import com.uncannyvalley.astralvpn.VpnServiceController
+import com.uncannyvalley.astralvpn.domain.VpnServiceController
 import com.uncannyvalley.astralvpn.data.dao.VpnConfigDao
 import com.uncannyvalley.astralvpn.data.repository.VpnRepositoryImpl
 import com.uncannyvalley.astralvpn.domain.repository.VpnRepository
