@@ -6,9 +6,10 @@ import com.uncannyvalley.astralvpn.domain.model.VpnConfig
 import com.uncannyvalley.astralvpn.domain.model.VpnStatus
 import com.uncannyvalley.astralvpn.domain.repository.VpnRepository
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class VpnRepositoryImpl(
-    private val dao: VpnConfigDao
+class VpnRepositoryImpl @Inject constructor(
+    private val vpnConfigDao: VpnConfigDao
 ) : VpnRepository {
 
     override suspend fun connect(config: VpnConfig): Result<Unit> {
