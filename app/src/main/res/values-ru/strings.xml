@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile">Профиль</string>
+    <string name="get_premium">Премиум-версия</string>
+    <string name="split_tunneling">Раздельное туннелирование</string>
+    <string name="theme">Тема</string>
+    <string name="app_icon">Значок приложения</string>
+    <string name="language">Язык</string>
+    <string name="help">Помощь</string>
+    <string name="rate_us">Оцените приложение</string>
+</resources>

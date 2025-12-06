@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">AstralVPN</string>
+    <string name="app_name" translatable="false">AstralVPN</string>
+
+    <!-- Settings Screen -->
+    <string name="profile">Profile</string>
+    <string name="get_premium">Get PREMIUM</string>
+    <string name="split_tunneling">Split Tunneling</string>
+    <string name="theme">Theme</string>
+    <string name="app_icon">App icon</string>
+    <string name="language">Language</string>
+    <string name="help">Help</string>
+    <string name="rate_us">Rate us</string>
 </resources>
