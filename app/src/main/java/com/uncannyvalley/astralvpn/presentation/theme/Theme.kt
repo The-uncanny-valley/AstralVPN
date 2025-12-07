@@ -16,7 +16,7 @@ private val DarkColorScheme = darkColorScheme(
     background = EerieBlack,
     onBackground = White,
     surface = SilverSand,
-    onSurface = SilverChalice,
+    onSurface = MountbattenPink,
     onSurfaceVariant = GullGray
 )
 
