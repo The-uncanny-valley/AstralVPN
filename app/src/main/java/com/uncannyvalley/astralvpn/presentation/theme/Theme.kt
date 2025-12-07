@@ -16,7 +16,7 @@ private val DarkColorScheme = darkColorScheme(
     background = EerieBlack,
     onBackground = White,
     surface = SilverSand,
-    onSurface = SilverChalice,
+    onSurface = MountbattenPink,
     onSurfaceVariant = GullGray
 )
 
@@ -28,7 +28,7 @@ private val LightColorScheme = lightColorScheme(
 fun AstralVPNTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
