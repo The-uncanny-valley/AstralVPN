@@ -46,12 +46,11 @@ fun SettingsScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-    ) { innerPadding ->
+    ) { padding ->
 
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(0.dp)
                 .paint(
                     painterResource(id = R.drawable.background_stars),
                     contentScale = ContentScale.FillHeight
@@ -62,6 +61,7 @@ fun SettingsScreen(
                 modifier = Modifier
                     .padding(start = 24.dp, end = 24.dp, top = 112.dp, bottom = 160.dp)
                     .fillMaxSize()
+                    .padding(padding)
                     .paint(
                         painterResource(id = R.drawable.background_glass),
                         contentScale = ContentScale.FillBounds
