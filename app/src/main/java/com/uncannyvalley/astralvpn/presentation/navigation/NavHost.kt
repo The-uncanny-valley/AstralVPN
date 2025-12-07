@@ -1,6 +1,10 @@
 package com.uncannyvalley.astralvpn.presentation.navigation
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
@@ -24,6 +28,13 @@ fun AstralNavHost(
         }
         composable(Screen.SettingsScreen.route) {
             SettingsRoute(
+                onBack = { navController.popBackStack() },
+                onNavigateHome = { navController.navigate(Screen.HomeScreen.route)},
+                onNavigateHelp = { navController.navigate(Screen.HelpScreen.route) }
+            )
+        }
+        composable(Screen.HelpScreen.route) {
+            HelpRoute(
                 onBack = { navController.popBackStack() }
             )
         }

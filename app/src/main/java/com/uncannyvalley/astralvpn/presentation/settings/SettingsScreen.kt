@@ -33,7 +33,8 @@ import com.uncannyvalley.astralvpn.presentation.theme.AstralVPNTheme
 @Composable
 fun SettingsScreen(
     onBack: () -> Unit,
-    onNavigateHome: () -> Unit
+    onNavigateHome: () -> Unit,
+    onNavigateHelp: () -> Unit
 ) {
     Scaffold(
         bottomBar = {
@@ -98,7 +99,8 @@ fun SettingsScreen(
 fun SettingsScreenPreview() {
     AstralVPNTheme(darkTheme = true) {
         SettingsScreen(
-            onBack = {}
+            onBack = {},
+            onNavigateHome = {}
         ) { }
     }
 }

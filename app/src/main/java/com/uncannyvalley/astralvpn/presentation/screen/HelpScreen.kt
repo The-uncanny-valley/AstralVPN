@@ -73,6 +73,9 @@ fun HelpScreen(
                         contentDescription = null,
                         tint = Color.Unspecified,
                         modifier = Modifier
+                            .clickable(
+                                onClick = onBack
+                            )
                     )
 
                     Spacer(modifier = Modifier.height(28.dp))
