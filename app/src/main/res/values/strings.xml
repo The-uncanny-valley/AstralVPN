@@ -14,4 +14,7 @@
     <!-- Help Screen -->
     <string name="help_title">Help</string>
     <string name="help_text">A VPN, or Virtual Private Network, is a service that creates a secure, encrypted connection over the internet to protect your data and privacy. It works by routing your internet traffic through a remote server, which masks your IP address and encrypts your data, making your online activity anonymous and more secure, especially on public Wi-Fi. This also allows you to bypass geographic restrictions and safely access private networks remotely. </string>
+
+    <!-- Language Screen -->
+    <string name="language_title">Language</string>
 </resources>
