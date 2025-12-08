@@ -18,4 +18,9 @@
     <!-- App Icon Screen -->
     <string name="icon_title">App Icon</string>
     <string name="icon_text">You can change app\'s icon to make it less visible for strangers.</string>
+
+    <!-- Profile Screen -->
+    <string name="profile_text_free_plan">Your plan is free. Upgrade to premium to unlock all features.</string>
+    <string name="profile_text_premium">You use a Premium version of an app.</string>
+    <string name="profile_btn_get_premium">Get Premium</string>
 </resources>

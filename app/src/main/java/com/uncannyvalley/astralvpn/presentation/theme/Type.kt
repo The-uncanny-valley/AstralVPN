@@ -52,7 +52,7 @@ val Typography = Typography(
     titleSmall = TextStyle(
         fontFamily = Roboto,
         fontWeight = FontWeight.Medium,
-        fontSize = 16.sp,
+        fontSize = 20.sp,
         letterSpacing = 0.sp
     ),
 
@@ -67,7 +67,7 @@ val Typography = Typography(
     labelMedium = TextStyle(
         fontFamily = Poppins,
         fontWeight = FontWeight.Medium,
-        fontSize = 18.sp,
+        fontSize = 17.sp,
         letterSpacing = 0.sp
     ),
 
