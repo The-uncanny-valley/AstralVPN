@@ -34,7 +34,8 @@ import com.uncannyvalley.astralvpn.presentation.theme.AstralVPNTheme
 fun SettingsScreen(
     onBack: () -> Unit,
     onNavigateHome: () -> Unit,
-    onNavigateHelp: () -> Unit
+    onNavigateHelp: () -> Unit,
+    onNavigateAppIcon: () -> Unit
 ) {
     Scaffold(
         bottomBar = {
@@ -100,7 +101,9 @@ fun SettingsScreenPreview() {
     AstralVPNTheme(darkTheme = true) {
         SettingsScreen(
             onBack = {},
-            onNavigateHome = {}
-        ) { }
+            onNavigateHome = {},
+            onNavigateHelp = {},
+            onNavigateAppIcon = {}
+        )
     }
 }

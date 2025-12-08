@@ -29,12 +29,18 @@ fun AstralNavHost(
         composable(Screen.SettingsScreen.route) {
             SettingsRoute(
                 onBack = { navController.popBackStack() },
-                onNavigateHome = { navController.navigate(Screen.HomeScreen.route)},
-                onNavigateHelp = { navController.navigate(Screen.HelpScreen.route) }
+                onNavigateHome = { navController.navigate(Screen.HomeScreen.route) },
+                onNavigateHelp = { navController.navigate(Screen.HelpScreen.route) },
+                onNavigateAppIcon = { navController.navigate(Screen.AppIconScreen.route) }
             )
         }
         composable(Screen.HelpScreen.route) {
             HelpRoute(
+                onBack = { navController.popBackStack() }
+            )
+        }
+        composable(Screen.AppIconScreen.route) {
+            AppIconRoute(
                 onBack = { navController.popBackStack() }
             )
         }

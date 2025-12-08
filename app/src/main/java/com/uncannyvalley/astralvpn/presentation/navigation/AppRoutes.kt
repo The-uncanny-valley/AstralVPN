@@ -7,6 +7,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.uncannyvalley.astralvpn.presentation.home.HomeScreen
 import com.uncannyvalley.astralvpn.presentation.home.HomeUiState
 import com.uncannyvalley.astralvpn.presentation.home.HomeViewModel
+import com.uncannyvalley.astralvpn.presentation.screen.AppIconScreen
 import com.uncannyvalley.astralvpn.presentation.screen.HelpScreen
 import com.uncannyvalley.astralvpn.presentation.settings.SettingsScreen
 
@@ -14,18 +15,21 @@ sealed class Screen(val route: String) {
     object HomeScreen : Screen("home")
     object SettingsScreen : Screen("settings")
     object HelpScreen : Screen("help")
+    object AppIconScreen : Screen("icon")
 }
 
 @Composable
 fun SettingsRoute(
     onBack: () -> Unit,
     onNavigateHome: () -> Unit,
-    onNavigateHelp: () -> Unit
+    onNavigateHelp: () -> Unit,
+    onNavigateAppIcon: () -> Unit
 ) {
     SettingsScreen(
         onBack = onBack,
         onNavigateHome = onNavigateHome,
-        onNavigateHelp = onNavigateHelp
+        onNavigateHelp = onNavigateHelp,
+        onNavigateAppIcon = onNavigateAppIcon
     )
 }
 
@@ -56,4 +60,11 @@ fun HelpRoute(
     onBack: () -> Unit
 ) {
     HelpScreen(onBack = onBack)
+}
+
+@Composable
+fun AppIconRoute(
+    onBack: () -> Unit
+) {
+    AppIconScreen(onBack = onBack)
 }
