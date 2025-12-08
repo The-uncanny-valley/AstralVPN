@@ -21,10 +21,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,11 +37,9 @@ import com.uncannyvalley.astralvpn.presentation.components.LanguageButton
 import com.uncannyvalley.astralvpn.presentation.theme.AstralVPNTheme
 
 @Composable
-fun LanguageScreen(
+fun AppIconScreen(
     onBack: () -> Unit
 ) {
-    val languages = listOf("Русский", "English")
-    var selectedLanguage by remember { mutableStateOf(languages.first()) }
 
     Scaffold(
         modifier = Modifier
@@ -96,20 +91,18 @@ fun LanguageScreen(
                     Spacer(modifier = Modifier.height(28.dp))
 
                     Text(
-                        text = stringResource(id = R.string.language_title),
+                        text = stringResource(id = R.string.icon_title),
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onPrimary,
                     )
 
                     Spacer(modifier = Modifier.height(32.dp))
 
-                    languages.forEach { language ->
-                        LanguageButton(
-                            language = language,
-                            isSelected = language == selectedLanguage,
-                            onClick = { selectedLanguage = language }
-                        )
-                    }
+                    Text(
+                        text = stringResource(id = R.string.icon_text),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onPrimary,
+                    )
                 }
             }
         }
@@ -122,7 +115,7 @@ fun LanguageScreen(
 @Composable
 fun LanguageScreenPreview() {
     AstralVPNTheme(darkTheme = true) {
-        LanguageScreen(
+        AppIconScreen(
             onBack = {}
         )
     }
