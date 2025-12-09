@@ -15,6 +15,20 @@ This project is currently in active development. Core features are being impleme
 * English and Russian localization
 * No-logs policy
 
+## Screenshots
+
+## Screenshots
+
+<table>
+  <tr>
+    <td><img src="media/home_dark.png" alt="Home Screen (Dark)" width="200"/></td>
+    <td><img src="media/settings_dark.png" alt="Settings Screen (Dark)" width="200"/></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">Dark Theme</td>
+  </tr>
+</table>
+
 ## Tech stach
 * Language: **Kotlin**
 * Architecture: **MVVM**
