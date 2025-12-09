@@ -12,3 +12,5 @@ val MountbattenPink = Color(0xFF938392)
 
 val MagentaRed = Color(0xFFAC4096)
 val CandleYellow = Color(0xFFE06EA2)
+val GraniteGray = Color(0xFF666666)
+val CarroburgCrimson = Color(0xFF71596C)
