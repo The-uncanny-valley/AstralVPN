@@ -35,7 +35,8 @@ fun SettingsScreen(
     onBack: () -> Unit,
     onNavigateHome: () -> Unit,
     onNavigateHelp: () -> Unit,
-    onNavigateAppIcon: () -> Unit
+    onNavigateAppIcon: () -> Unit,
+    onNavigateProfile: () -> Unit
 ) {
     Scaffold(
         bottomBar = {
@@ -77,14 +78,18 @@ fun SettingsScreen(
                         .padding(start = 28.dp, end = 28.dp, top = 72.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    val settingsItems = listOf(
-                        profile, split_tunneling, theme, app_icon, language, help
+                    val settingsActions = mapOf(
+                        profile to onNavigateProfile,
+                        split_tunneling to {},
+                        theme to {},
+                        app_icon to onNavigateAppIcon,
+                        help to onNavigateHelp
                     )
 
-                    settingsItems.forEach { id ->
+                    settingsActions.forEach { (id, action) ->
                         SettingsRow(
                             title = stringResource(id),
-                            onClick = { /* */ }
+                            onClick = action
                         )
                     }
                 }
@@ -103,7 +108,8 @@ fun SettingsScreenPreview() {
             onBack = {},
             onNavigateHome = {},
             onNavigateHelp = {},
-            onNavigateAppIcon = {}
+            onNavigateAppIcon = {},
+            onNavigateProfile = {}
         )
     }
 }
