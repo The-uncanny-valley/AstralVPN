@@ -33,12 +33,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.uncannyvalley.astralvpn.R
+import com.uncannyvalley.astralvpn.presentation.components.LanguageButton
 import com.uncannyvalley.astralvpn.presentation.theme.AstralVPNTheme
 
 @Composable
-fun HelpScreen(
+fun AppIconScreen(
     onBack: () -> Unit
 ) {
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -89,7 +91,7 @@ fun HelpScreen(
                     Spacer(modifier = Modifier.height(28.dp))
 
                     Text(
-                        text = stringResource(id = R.string.help_title),
+                        text = stringResource(id = R.string.icon_title),
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onPrimary,
                     )
@@ -97,9 +99,9 @@ fun HelpScreen(
                     Spacer(modifier = Modifier.height(32.dp))
 
                     Text(
-                        text = stringResource(id = R.string.help_text),
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onPrimary
+                        text = stringResource(id = R.string.icon_text),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onPrimary,
                     )
                 }
             }
@@ -108,13 +110,12 @@ fun HelpScreen(
 }
 
 @Preview(
-    showBackground = true,
-    locale = "ru"
+    showBackground = true
 )
 @Composable
-fun HelpScreenPreview() {
+fun LanguageScreenPreview() {
     AstralVPNTheme(darkTheme = true) {
-        HelpScreen(
+        AppIconScreen(
             onBack = {}
         )
     }
