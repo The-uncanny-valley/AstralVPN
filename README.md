@@ -17,8 +17,6 @@ This project is currently in active development. Core features are being impleme
 
 ## Screenshots
 
-## Screenshots
-
 <table>
   <tr>
     <td><img src="media/home_dark.png" alt="Home Screen (Dark)" width="200"/></td>
