@@ -1,0 +1,253 @@
+package com.uncannyvalley.astralvpn.presentation.auth.register
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.ripple
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.uncannyvalley.astralvpn.R
+import com.uncannyvalley.astralvpn.presentation.theme.AstralVPNTheme
+import kotlinx.coroutines.delay
+
+@Composable
+fun VerificationScreen(
+    uiState: VerificationUiState,
+    onCodeChange: (String) -> Unit,
+    onVerifyClick: () -> Unit
+) {
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+    ) { padding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 34.dp, vertical = 92.dp)
+                .padding(padding),
+            horizontalAlignment = Alignment.Start
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.btn_return),
+                contentDescription = "Return",
+                tint = Color.Unspecified,
+                modifier = Modifier
+                    .size(24.dp)
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = ripple(bounded = false),
+                        onClick = {  }
+                    )
+            )
+
+            Spacer(modifier = Modifier.height(42.dp))
+
+            Text(
+                text = stringResource(R.string.verification_title),
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+
+            Spacer(modifier = Modifier.height(22.dp))
+
+            Text(
+                text = stringResource(R.string.verification_title),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            // Code input field
+            VerificationCodeField(
+                code = "",
+                onCodeChange = onCodeChange,
+                error = false,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    }
+}
+
+@Composable
+fun VerificationCodeField(
+    code: String,
+    onCodeChange: (String) -> Unit,
+    error: Boolean?,
+    modifier: Modifier = Modifier
+) {
+    val focusRequester = remember { FocusRequester() }
+    val focusManager = LocalFocusManager.current
+
+    LaunchedEffect(Unit) {
+        focusRequester.requestFocus()
+    }
+
+    Column(modifier = modifier) {
+        // Limit to 6 digits and only allow numbers
+        BasicTextField(
+            value = code,
+            onValueChange = { newValue ->
+                // Only allow digits and limit to 6 characters
+                val filtered = newValue.filter { it.isDigit() }.take(4)
+                onCodeChange(filtered)
+
+                if (filtered.length == 4) {
+                    focusManager.clearFocus()
+                }
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .focusable()
+                .focusRequester(focusRequester),
+            singleLine = true,
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Done
+            ),
+//            cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
+            decorationBox = { innerTextField ->
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    // Code digits display
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        for (i in 0 until 4) {
+                            val digit = if (i < code.length) code[i].toString() else ""
+                            val showCursor = i == code.length && error == null
+
+                            Box(
+                                modifier = Modifier
+                                    .size(
+                                        width = 68.dp,
+                                        height = 50.dp
+                                    )
+                                    .background(
+                                        color = MaterialTheme.colorScheme.surface,
+                                        shape = RoundedCornerShape(8.dp)
+                                    ),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                if (digit.isNotEmpty()) {
+                                    Text(
+                                        text = digit,
+                                        style = MaterialTheme.typography.headlineMedium,
+                                        color = if (error != null) {
+                                            MaterialTheme.colorScheme.error
+                                        } else {
+                                            MaterialTheme.colorScheme.onSurface
+                                        }
+                                    )
+                                } else if (showCursor) {
+                                    BlinkingCursor()
+                                }
+                            }
+                        }
+                    }
+
+                    // Hidden text field for input
+                    Box(
+                        modifier = Modifier
+                            .height(0.dp)
+                            .alpha(0f)
+                    ) {
+                        innerTextField()
+                    }
+                }
+            }
+        )
+
+        // Error message
+        if (error != null) {
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "",
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.bodySmall,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .padding(top = 8.dp)
+                    .fillMaxWidth()
+            )
+        }
+    }
+}
+
+@Composable
+fun BlinkingCursor(modifier: Modifier = Modifier) {
+    var visible by remember { mutableStateOf(true) }
+
+    LaunchedEffect(Unit) {
+        while (true) {
+            delay(500)
+            visible = !visible
+        }
+    }
+
+    if (visible) {
+        Box(
+            modifier = Modifier
+                .width(2.dp)
+                .height(28.dp)
+                .background(MaterialTheme.colorScheme.secondary)
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun VerificationScreenPreview() {
+    val previewVM = FakeVerificationViewModel()
+
+    AstralVPNTheme(darkTheme = true) {
+        VerificationScreen(
+            uiState = previewVM.uiState.collectAsState().value,
+            onCodeChange = {},
+            onVerifyClick = {}
+        )
+    }
+}
