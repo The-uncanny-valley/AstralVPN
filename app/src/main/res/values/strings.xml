@@ -35,4 +35,13 @@
     <string name="register_btn">Sign up</string>
     <string name="register_login">Log in</string>
     <string name="register_skip">Skip</string>
+    
+    <!-- Success Screen -->
+    <string name="success_title">Success</string>
+
+    <!-- Success Screen -->
+    <string name="verification_title">Enter verification code</string>
+    <string name="verification_text">4-digit code was send to your email</string>
+    <string name="verification_verify_btn">Verify</string>
+    <string name="verification_resend_code">Resend code</string>
 </resources>
