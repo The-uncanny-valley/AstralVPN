@@ -15,4 +15,11 @@
     <string name="profile_text_free_plan">Вы используете бесплатную версию приложения. Чтобы получить доступ к дополнительным возможностям, оформите премиум-подписку.</string>
     <string name="profile_text_premium">Вы используете Premium-версию приложения</string>
     <string name="profile_btn_get_premium">Премиум-версия</string>
+    <string name="register_title">Создать аккаунт</string>
+    <string name="register_name">Имя</string>
+    <string name="register_password">Пароль</string>
+    <string name="register_accept_terms">Я принимаю пользовательское соглашение</string>
+    <string name="register_btn">Зарегистрироваться</string>
+    <string name="register_login">Войти в существующий аккаунт</string>
+    <string name="register_skip">Продолжить без регистрации</string>
 </resources>
