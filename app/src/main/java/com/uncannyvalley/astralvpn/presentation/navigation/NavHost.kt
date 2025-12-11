@@ -49,7 +49,37 @@ fun AstralNavHost(
             ProfileRoute(
                 onBack = { navController.popBackStack() },
                 onEditButtonClick = { TODO() },
-                onGetPremiumClick = { TODO() }
+                onGetPremiumClick = { navController.navigate(Screen.RegisterScreen.route) }
+            )
+        }
+        composable(Screen.RegisterScreen.route) {
+            RegisterRoute(
+                onRegisterSuccess = {
+                    navController.navigate(Screen.HomeScreen.route) { // NOT HOME!
+                        popUpTo(Screen.RegisterScreen.route) { inclusive = true }
+                    }
+                },
+                onBack = { navController.popBackStack() }
+            )
+        }
+        composable(Screen.SuccessScreen.route) {
+            SuccessRoute(
+                onFinished = {
+                    navController.navigate(Screen.VerificationScreen.route) {
+                        popUpTo(Screen.SuccessScreen.route) { inclusive = true }
+                    }
+                }
+            )
+        }
+        composable(Screen.VerificationScreen.route) {
+            VerificationRoute(
+                onVerified = {
+                    navController.navigate(Screen.VerificationScreen.route) {
+                        popUpTo(Screen.VerificationScreen.route) {
+                            inclusive = true
+                        }
+                    }
+                }
             )
         }
     }
