@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.uncannyvalley.astralvpn.presentation.theme.White
 
@@ -41,4 +42,15 @@ fun AuthButton(
     ) {
         Text(text, style = MaterialTheme.typography.labelLarge)
     }
+}
+
+@Preview
+@Composable
+fun AuthButtonPreview() {
+    AuthButton(
+        text = "Sign up",
+        enabled = true,
+        onClick = {},
+        modifier = Modifier,
+    )
 }
