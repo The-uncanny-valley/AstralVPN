@@ -20,7 +20,7 @@
     <string name="register_password">Пароль</string>
     <string name="register_accept_terms">Я принимаю пользовательское соглашение</string>
     <string name="register_btn">Зарегистрироваться</string>
-    <string name="register_login">Войти в существующий аккаунт</string>
+    <string name="register_sign_up">Войти в существующий аккаунт</string>
     <string name="register_skip">Продолжить без регистрации</string>
     <string name="success_title">Успешно</string>
     <string name="verification_title">Введите код подтверждения</string>

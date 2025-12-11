@@ -33,7 +33,7 @@
     <string name="register_password_label" translatable="false">•••••••••</string>
     <string name="register_accept_terms">I accept terms and conditions</string>
     <string name="register_btn">Sign up</string>
-    <string name="register_login">Log in</string>
+    <string name="register_sign_up">Create an account</string>
     <string name="register_skip">Skip</string>
     
     <!-- Success Screen -->

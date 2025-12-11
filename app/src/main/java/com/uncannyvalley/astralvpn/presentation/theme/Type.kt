@@ -71,6 +71,12 @@ val Typography = Typography(
         letterSpacing = 0.sp
     ),
 
+    labelLarge = TextStyle(
+        fontFamily = Poppins,
+        fontWeight = FontWeight.Medium,
+        fontSize = 18.sp
+    ),
+
     bodyMedium = TextStyle(
         fontFamily = Roboto,
         fontWeight = FontWeight.Medium,
