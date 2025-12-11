@@ -2,10 +2,13 @@ package com.uncannyvalley.astralvpn.di
 
 import com.uncannyvalley.astralvpn.domain.VpnServiceController
 import com.uncannyvalley.astralvpn.data.dao.VpnConfigDao
+import com.uncannyvalley.astralvpn.data.repository.AuthRepositoryImpl
 import com.uncannyvalley.astralvpn.data.repository.VpnRepositoryImpl
+import com.uncannyvalley.astralvpn.domain.repository.AuthRepository
 import com.uncannyvalley.astralvpn.domain.repository.VpnRepository
 import com.uncannyvalley.astralvpn.domain.usecase.ConnectVpnUseCase
 import com.uncannyvalley.astralvpn.domain.usecase.DisconnectVpnUseCase
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,28 +17,36 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RepositoryModule {
+abstract class RepositoryModule {
 
-    @Provides
-    @Singleton
-    fun provideVpnRepository(
-        vpnConfigDao: VpnConfigDao,
-        vpnServiceController: VpnServiceController
-    ): VpnRepository {
-        return VpnRepositoryImpl(
-            vpnConfigDao = vpnConfigDao
-        )
+    companion object {
+        @Provides
+        @Singleton
+        fun provideVpnRepository(
+            vpnConfigDao: VpnConfigDao,
+            vpnServiceController: VpnServiceController
+        ): VpnRepository {
+            return VpnRepositoryImpl(
+                vpnConfigDao = vpnConfigDao
+            )
+        }
+
+        @Provides
+        @Singleton
+        fun provideConnectVpnUseCase(
+            repository: VpnRepository
+        ): ConnectVpnUseCase = ConnectVpnUseCase(repository)
+
+        @Provides
+        @Singleton
+        fun provideDisconnectVpnUseCase(
+            repository: VpnRepository
+        ): DisconnectVpnUseCase = DisconnectVpnUseCase(repository)
     }
 
-    @Provides
+    @Binds
     @Singleton
-    fun provideConnectVpnUseCase(
-        repository: VpnRepository
-    ): ConnectVpnUseCase = ConnectVpnUseCase(repository)
-
-    @Provides
-    @Singleton
-    fun provideDisconnectVpnUseCase(
-        repository: VpnRepository
-    ): DisconnectVpnUseCase = DisconnectVpnUseCase(repository)
+    abstract fun bindAuthRepository(
+        impl: AuthRepositoryImpl
+    ): AuthRepository
 }

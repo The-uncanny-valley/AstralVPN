@@ -1,8 +1,9 @@
 package com.uncannyvalley.astralvpn.domain.usecase
 
 import com.uncannyvalley.astralvpn.domain.repository.AuthRepository
+import javax.inject.Inject
 
-class VerificationUseCase(
+class VerificationUseCase @Inject constructor(
     private val repository: AuthRepository
 ) {
     suspend operator fun invoke(code: String): Result<Unit> {
