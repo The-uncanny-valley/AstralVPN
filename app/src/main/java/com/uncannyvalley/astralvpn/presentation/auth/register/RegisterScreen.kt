@@ -38,8 +38,11 @@ fun RegisterScreen(
 
     LaunchedEffect(viewModel.events) {
         viewModel.events.collect { event ->
-            if (event is RegisterEvent.Success) {
-                onRegisterSuccess() // navigate to next screen
+            when (event) {
+                is RegisterEvent.CodeSent ->
+                    onRegisterSuccess()
+
+                RegisterEvent.Success -> { /* unused for now */ }
             }
         }
     }

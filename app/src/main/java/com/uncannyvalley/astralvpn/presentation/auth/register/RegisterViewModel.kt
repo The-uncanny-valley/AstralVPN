@@ -49,9 +49,9 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
-    override fun onRegisterClick(onSuppress: () -> Unit) {
+    override fun onRegisterClick() {
         val state = _uiState.value
-        if (!state.isButtonEnabled) return
+        if (!state.isSubmitEnabled) return
 
         viewModelScope.launch {
             update { it.copy(isLoading = true) }
@@ -63,7 +63,7 @@ class RegisterViewModel @Inject constructor(
             )
 
             if (result.isSuccess) {
-                _events.emit(RegisterEvent.Success)
+                _events.emit(RegisterEvent.CodeSent)
             } else {
                 update { it.copy(errorMessage = "Registration failed") }
             }
@@ -73,5 +73,7 @@ class RegisterViewModel @Inject constructor(
 }
 
 sealed class RegisterEvent {
+    data object CodeSent : RegisterEvent()
+    data class Error(val reason: String)
     data object Success : RegisterEvent()
 }

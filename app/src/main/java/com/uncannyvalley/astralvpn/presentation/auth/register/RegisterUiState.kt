@@ -8,4 +8,10 @@ data class RegisterUiState(
     val isLoading: Boolean = false,
     val isButtonEnabled: Boolean = false,
     val errorMessage: String? = null
-)
+) {
+    val isSubmitEnabled: Boolean
+        get() = email.isNotBlank() &&
+                name.isNotBlank() &&
+                password.length >= 8 &&
+                termsAccepted
+}
