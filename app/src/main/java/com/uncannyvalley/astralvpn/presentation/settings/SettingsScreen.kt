@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import com.uncannyvalley.astralvpn.R
 import com.uncannyvalley.astralvpn.R.string.app_icon
 import com.uncannyvalley.astralvpn.R.string.help
-import com.uncannyvalley.astralvpn.R.string.language
 import com.uncannyvalley.astralvpn.R.string.profile
 import com.uncannyvalley.astralvpn.R.string.split_tunneling
 import com.uncannyvalley.astralvpn.R.string.theme
