@@ -102,9 +102,9 @@ fun VerificationScreen(
 
             // Code input field
             VerificationCodeField(
-                code = "",
+                code = uiState.code,
                 onCodeChange = onCodeChange,
-                error = false,
+                error = null,
                 modifier = Modifier.fillMaxWidth()
             )
         }
