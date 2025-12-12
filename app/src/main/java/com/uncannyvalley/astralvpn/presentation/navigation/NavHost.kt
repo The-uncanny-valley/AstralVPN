@@ -79,7 +79,8 @@ fun AstralNavHost(
                             inclusive = true
                         }
                     }
-                }
+                },
+                onBack = { navController.popBackStack() }
             )
         }
     }

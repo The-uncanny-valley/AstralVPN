@@ -116,7 +116,8 @@ fun RegisterRoute(
 
 @Composable
 fun VerificationRoute(
-    viewModel: VerificationViewModelInterface = hiltViewModel(),
+    onBack: () -> Unit,
+    viewModel: VerificationViewModel = hiltViewModel(),
     onVerified: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -132,7 +133,8 @@ fun VerificationRoute(
     VerificationScreen(
         uiState = uiState,
         onCodeChange = viewModel::onCodeChange,
-        onVerifyClick = viewModel::onVerifyClick
+        onVerifyClick = viewModel::onVerifyClick,
+        onBack = onBack
     )
 }
 

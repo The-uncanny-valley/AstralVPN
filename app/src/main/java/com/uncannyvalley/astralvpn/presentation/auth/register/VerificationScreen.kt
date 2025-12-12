@@ -54,7 +54,8 @@ import kotlinx.coroutines.delay
 fun VerificationScreen(
     uiState: VerificationUiState,
     onCodeChange: (String) -> Unit,
-    onVerifyClick: () -> Unit
+    onVerifyClick: () -> Unit,
+    onBack: () -> Unit
 ) {
     Scaffold(
         modifier = Modifier
@@ -77,7 +78,7 @@ fun VerificationScreen(
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = ripple(bounded = false),
-                        onClick = {  }
+                        onClick = onBack
                     )
             )
 
@@ -247,7 +248,8 @@ fun VerificationScreenPreview() {
         VerificationScreen(
             uiState = previewVM.uiState.collectAsState().value,
             onCodeChange = {},
-            onVerifyClick = {}
+            onVerifyClick = {},
+            onBack = {}
         )
     }
 }
