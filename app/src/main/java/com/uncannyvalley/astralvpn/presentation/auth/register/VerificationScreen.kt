@@ -45,6 +45,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.uncannyvalley.astralvpn.R
+import com.uncannyvalley.astralvpn.presentation.components.AuthButton
 import com.uncannyvalley.astralvpn.presentation.theme.AstralVPNTheme
 import kotlinx.coroutines.delay
 
@@ -104,6 +105,12 @@ fun VerificationScreen(
                 onCodeChange = onCodeChange,
                 error = null,
                 modifier = Modifier.fillMaxWidth()
+            )
+
+            AuthButton(
+                text = "Verify",
+                enabled = uiState.code.length == 4,
+                onClick = { onVerifyClick() }
             )
         }
     }
