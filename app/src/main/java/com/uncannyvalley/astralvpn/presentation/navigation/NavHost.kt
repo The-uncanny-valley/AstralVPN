@@ -55,7 +55,7 @@ fun AstralNavHost(
         composable(Screen.RegisterScreen.route) {
             RegisterRoute(
                 onRegisterSuccess = {
-                    navController.navigate(Screen.HomeScreen.route) { // NOT HOME!
+                    navController.navigate(Screen.VerificationScreen.route) {
                         popUpTo(Screen.RegisterScreen.route) { inclusive = true }
                     }
                 },
