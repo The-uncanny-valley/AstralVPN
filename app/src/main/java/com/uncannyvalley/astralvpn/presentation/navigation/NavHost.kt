@@ -55,9 +55,7 @@ fun AstralNavHost(
         composable(Screen.RegisterScreen.route) {
             RegisterRoute(
                 onRegisterSuccess = {
-                    navController.navigate(Screen.VerificationScreen.route) {
-                        popUpTo(Screen.RegisterScreen.route) { inclusive = true }
-                    }
+                    navController.navigate(Screen.VerificationScreen.route)
                 },
                 onBack = { navController.popBackStack() }
             )
@@ -65,7 +63,7 @@ fun AstralNavHost(
         composable(Screen.SuccessScreen.route) {
             SuccessRoute(
                 onFinished = {
-                    navController.navigate(Screen.VerificationScreen.route) {
+                    navController.navigate(Screen.HomeScreen.route) {
                         popUpTo(Screen.SuccessScreen.route) { inclusive = true }
                     }
                 }
@@ -74,7 +72,7 @@ fun AstralNavHost(
         composable(Screen.VerificationScreen.route) {
             VerificationRoute(
                 onVerified = {
-                    navController.navigate(Screen.VerificationScreen.route) {
+                    navController.navigate(Screen.SuccessScreen.route) {
                         popUpTo(Screen.VerificationScreen.route) {
                             inclusive = true
                         }

@@ -10,7 +10,7 @@ import com.uncannyvalley.astralvpn.presentation.auth.register.RegisterViewModel
 import com.uncannyvalley.astralvpn.presentation.auth.register.SuccessScreen
 import com.uncannyvalley.astralvpn.presentation.auth.register.VerificationEvent
 import com.uncannyvalley.astralvpn.presentation.auth.register.VerificationScreen
-import com.uncannyvalley.astralvpn.presentation.auth.register.VerificationViewModelInterface
+import com.uncannyvalley.astralvpn.presentation.auth.register.VerificationViewModel
 import com.uncannyvalley.astralvpn.presentation.home.HomeScreen
 import com.uncannyvalley.astralvpn.presentation.home.HomeUiState
 import com.uncannyvalley.astralvpn.presentation.home.HomeViewModel
