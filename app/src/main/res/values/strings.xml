@@ -39,9 +39,10 @@
     <!-- Success Screen -->
     <string name="success_title">Success</string>
 
-    <!-- Success Screen -->
+    <!-- Code Verification Screen -->
     <string name="verification_title">Enter verification code</string>
     <string name="verification_text">4-digit code was send to your email</string>
     <string name="verification_verify_btn">Verify</string>
+    <string name="verification_wrong_code">Wrong code</string>
     <string name="verification_resend_code">Resend code</string>
 </resources>

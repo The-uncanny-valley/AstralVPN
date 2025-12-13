@@ -25,6 +25,7 @@
     <string name="success_title">Успешно</string>
     <string name="verification_title">Введите код подтверждения</string>
     <string name="verification_text">На вашу почту был выслан 4-значный код</string>
-    <string name="verification_verify_btn">Подтвердить</string>
+    <string name="verification_verify_btn">ПОДТВЕРДИТЬ</string>
+    <string name="verification_wrong_code">Неверный код</string>
     <string name="verification_resend_code">Отправить код повторно</string>
 </resources>

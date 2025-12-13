@@ -92,7 +92,7 @@ fun VerificationScreen(
             Spacer(modifier = Modifier.height(22.dp))
 
             Text(
-                text = stringResource(R.string.verification_title),
+                text = stringResource(R.string.verification_text),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onBackground
             )
@@ -110,7 +110,17 @@ fun VerificationScreen(
             AuthButton(
                 text = "Verify",
                 enabled = uiState.code.length == 4,
+                text = stringResource(R.string.verification_verify_btn),
                 onClick = { onVerifyClick() }
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Text(
+                text = stringResource(R.string.verification_resend_code),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
+                modifier = Modifier.align(alignment = Alignment.CenterHorizontally)
             )
         }
     }
@@ -211,7 +221,7 @@ fun VerificationCodeField(
         if (error != null) {
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "",
+                text = stringResource(R.string.verification_wrong_code),
                 color = MaterialTheme.colorScheme.error,
                 style = MaterialTheme.typography.bodySmall,
                 textAlign = TextAlign.Center,
