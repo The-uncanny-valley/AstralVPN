@@ -1,6 +1,7 @@
 package com.uncannyvalley.astralvpn.presentation.auth.register
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -35,8 +36,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -103,14 +104,14 @@ fun VerificationScreen(
             VerificationCodeField(
                 code = uiState.code,
                 onCodeChange = onCodeChange,
-                error = null,
-                modifier = Modifier.fillMaxWidth()
+                error = uiState.errorMessage != null, // ?
+                modifier = Modifier.fillMaxWidth(),
+                uiState = uiState
             )
 
             AuthButton(
-                text = "Verify",
-                enabled = uiState.code.length == 4,
                 text = stringResource(R.string.verification_verify_btn),
+                enabled = uiState.code.length == 4 && !uiState.isLoading,
                 onClick = { onVerifyClick() }
             )
 
@@ -131,10 +132,12 @@ fun VerificationCodeField(
     code: String,
     onCodeChange: (String) -> Unit,
     error: Boolean?,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    uiState: VerificationUiState
 ) {
     val focusRequester = remember { FocusRequester() }
-    val focusManager = LocalFocusManager.current
+
+    var isFocused by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         focusRequester.requestFocus()
@@ -148,21 +151,18 @@ fun VerificationCodeField(
                 // Only allow digits and limit to 6 characters
                 val filtered = newValue.filter { it.isDigit() }.take(4)
                 onCodeChange(filtered)
-
-                if (filtered.length == 4) {
-                    focusManager.clearFocus()
-                }
             },
             modifier = Modifier
                 .fillMaxWidth()
                 .focusable()
-                .focusRequester(focusRequester),
+                .focusRequester(focusRequester)
+                .onFocusChanged { isFocused = it.isFocused }
+            ,
             singleLine = true,
             keyboardOptions = KeyboardOptions.Default.copy(
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Done
             ),
-//            cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
             decorationBox = { innerTextField ->
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
@@ -174,7 +174,35 @@ fun VerificationCodeField(
                     ) {
                         for (i in 0 until 4) {
                             val digit = if (i < code.length) code[i].toString() else ""
-                            val showCursor = i == code.length && error == null
+                            val showCursor =
+                                isFocused && i == code.length
+                            val isActiveBox = isFocused && i == code.length
+
+                            val isError = error == true
+
+                            val borderColor = when {
+                                isError -> MaterialTheme.colorScheme.error
+                                isActiveBox -> MaterialTheme.colorScheme.outlineVariant
+                                else -> MaterialTheme.colorScheme.outline
+                            }
+
+                            val borderWidth = when {
+                                isError -> 1.dp
+                                isActiveBox -> 2.dp
+                                else -> 1.dp
+                            }
+
+                            val backgroundColor = if (isError) {
+                                MaterialTheme.colorScheme.errorContainer
+                            } else {
+                                MaterialTheme.colorScheme.primaryContainer
+                            }
+
+                            val textColor = if (isError) {
+                                MaterialTheme.colorScheme.onErrorContainer
+                            } else {
+                                MaterialTheme.colorScheme.onPrimaryContainer
+                            }
 
                             Box(
                                 modifier = Modifier
@@ -182,8 +210,13 @@ fun VerificationCodeField(
                                         width = 68.dp,
                                         height = 50.dp
                                     )
+                                    .border(
+                                        shape = RoundedCornerShape(8.dp),
+                                        color = borderColor,
+                                        width = borderWidth
+                                    )
                                     .background(
-                                        color = MaterialTheme.colorScheme.surface,
+                                        color = backgroundColor,
                                         shape = RoundedCornerShape(8.dp)
                                     ),
                                 contentAlignment = Alignment.Center
@@ -192,11 +225,7 @@ fun VerificationCodeField(
                                     Text(
                                         text = digit,
                                         style = MaterialTheme.typography.headlineMedium,
-                                        color = if (error != null) {
-                                            MaterialTheme.colorScheme.error
-                                        } else {
-                                            MaterialTheme.colorScheme.onSurface
-                                        }
+                                        color = textColor
                                     )
                                 } else if (showCursor) {
                                     BlinkingCursor()
@@ -218,8 +247,7 @@ fun VerificationCodeField(
         )
 
         // Error message
-        if (error != null) {
-            Spacer(modifier = Modifier.height(8.dp))
+        if (!uiState.errorMessage.isNullOrEmpty()) {
             Text(
                 text = stringResource(R.string.verification_wrong_code),
                 color = MaterialTheme.colorScheme.error,
@@ -229,6 +257,9 @@ fun VerificationCodeField(
                     .padding(top = 8.dp)
                     .fillMaxWidth()
             )
+            Spacer(modifier = Modifier.height(8.dp))
+        } else {
+            Spacer(modifier = Modifier.height(32.dp))
         }
     }
 }
@@ -247,9 +278,9 @@ fun BlinkingCursor(modifier: Modifier = Modifier) {
     if (visible) {
         Box(
             modifier = Modifier
-                .width(2.dp)
+                .width(3.dp)
                 .height(28.dp)
-                .background(MaterialTheme.colorScheme.secondary)
+                .background(MaterialTheme.colorScheme.onPrimaryContainer)
         )
     }
 }

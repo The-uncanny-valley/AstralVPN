@@ -41,6 +41,7 @@ class VerificationViewModel @Inject constructor(
             } else {
                 _uiState.update {
                     it.copy(
+                        code = "",
                         errorMessage = "Invalid code",
                         isLoading = false
                     )
