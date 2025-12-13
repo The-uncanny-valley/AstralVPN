@@ -68,7 +68,17 @@ class FakeVerificationViewModel : VerificationViewModelInterface {
     override val events: SharedFlow<VerificationEvent> = _events
 
     override fun onCodeChange(value: String) {
-        _uiState.value = _uiState.value.copy(code = value)
+        _uiState.value = _uiState.value.copy(code = value, errorMessage = null)
     }
-    override fun onVerifyClick() {}
+    override fun onVerifyClick() {
+        // Fake verification: if code is "1234", succeed
+        val code = _uiState.value.code
+        if (code.length < 4) return
+
+        if (code == "1234") {
+            _events.tryEmit(VerificationEvent.Success)
+        } else {
+            _uiState.value = _uiState.value.copy(errorMessage = "Invalid code")
+        }
+    }
 }
