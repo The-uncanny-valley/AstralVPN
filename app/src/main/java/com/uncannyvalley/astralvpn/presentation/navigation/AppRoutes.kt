@@ -1,9 +1,16 @@
 package com.uncannyvalley.astralvpn.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.uncannyvalley.astralvpn.presentation.auth.register.RegisterScreen
+import com.uncannyvalley.astralvpn.presentation.auth.register.RegisterViewModel
+import com.uncannyvalley.astralvpn.presentation.auth.register.SuccessScreen
+import com.uncannyvalley.astralvpn.presentation.auth.register.VerificationEvent
+import com.uncannyvalley.astralvpn.presentation.auth.register.VerificationScreen
+import com.uncannyvalley.astralvpn.presentation.auth.register.VerificationViewModel
 import com.uncannyvalley.astralvpn.presentation.home.HomeScreen
 import com.uncannyvalley.astralvpn.presentation.home.HomeUiState
 import com.uncannyvalley.astralvpn.presentation.home.HomeViewModel
@@ -19,6 +26,12 @@ sealed class Screen(val route: String) {
     object HelpScreen : Screen("help")
     object AppIconScreen : Screen("icon")
     object ProfileScreen : Screen("profile")
+    object RegisterScreen : Screen("register")
+    object VerificationScreen : Screen("verification?email={email}") {
+        fun createRoute(email: String) = "verification?email=$email"
+    }
+
+    object SuccessScreen : Screen("success")
 }
 
 @Composable
@@ -89,4 +102,57 @@ fun ProfileRoute(
         onGetPremiumClick = onGetPremiumClick,
         onBack = onBack
     )
+}
+
+@Composable
+fun RegisterRoute(
+    onBack: () -> Unit,
+    onRegisterSuccess: (String) -> Unit,
+    viewModel: RegisterViewModel = hiltViewModel()
+) {
+    RegisterScreen(
+        viewModel = viewModel,
+        onRegisterSuccess = {
+            onRegisterSuccess(viewModel.uiState.value.email)
+        },
+        onBack = onBack
+    )
+}
+
+@Composable
+fun VerificationRoute(
+    email: String,
+    onBack: () -> Unit,
+    viewModel: VerificationViewModel = hiltViewModel(),
+    onVerified: () -> Unit
+) {
+    val uiState by viewModel.uiState.collectAsState()
+
+    LaunchedEffect(viewModel.events) {
+        viewModel.events.collect { event ->
+            if (event is VerificationEvent.Success) {
+                onVerified()
+            }
+        }
+    }
+
+    VerificationScreen(
+        uiState = uiState,
+        email = email,
+        onCodeChange = viewModel::onCodeChange,
+        onVerifyClick = viewModel::onVerifyClick,
+        onBack = onBack
+    )
+}
+
+@Composable
+fun SuccessRoute(
+    onFinished: () -> Unit
+) {
+    LaunchedEffect(Unit) {
+        kotlinx.coroutines.delay(1500)
+        onFinished()
+    }
+
+    SuccessScreen()
 }

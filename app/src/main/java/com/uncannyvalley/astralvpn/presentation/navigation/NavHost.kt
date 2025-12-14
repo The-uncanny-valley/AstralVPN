@@ -6,9 +6,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 
 @Composable
 fun AstralNavHost(
@@ -49,7 +51,48 @@ fun AstralNavHost(
             ProfileRoute(
                 onBack = { navController.popBackStack() },
                 onEditButtonClick = { TODO() },
-                onGetPremiumClick = { TODO() }
+                onGetPremiumClick = { navController.navigate(Screen.RegisterScreen.route) }
+            )
+        }
+        composable(Screen.RegisterScreen.route) {
+            RegisterRoute(
+                onRegisterSuccess = { email ->
+                    navController.navigate(
+                        Screen.VerificationScreen.createRoute(email)
+                    )
+                },
+                onBack = { navController.popBackStack() }
+            )
+        }
+        composable(Screen.SuccessScreen.route) {
+            SuccessRoute(
+                onFinished = {
+                    navController.navigate(Screen.HomeScreen.route) {
+                        popUpTo(Screen.SuccessScreen.route) { inclusive = true }
+                    }
+                }
+            )
+        }
+        composable(
+            route = Screen.VerificationScreen.route,
+            arguments = listOf(
+                navArgument("email") { type = NavType.StringType }
+            )
+        ) { backStackEntry ->
+            val email = backStackEntry.arguments
+                ?.getString("email")
+                .orEmpty()
+
+            VerificationRoute(
+                email = email,
+                onVerified = {
+                    navController.navigate(Screen.SuccessScreen.route) {
+                        popUpTo(Screen.VerificationScreen.route) {
+                            inclusive = true
+                        }
+                    }
+                },
+                onBack = { navController.popBackStack() }
             )
         }
     }

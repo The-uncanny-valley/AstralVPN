@@ -23,4 +23,26 @@
     <string name="profile_text_free_plan">Your plan is free. Upgrade to premium to unlock all features.</string>
     <string name="profile_text_premium">You use a Premium version of an app.</string>
     <string name="profile_btn_get_premium">Get Premium</string>
+    
+    <!-- Register Screen -->
+    <string name="register_title">Create Account</string>
+    <string name="register_email_label" translatable="false">yourname@gmail.com</string>
+    <string name="register_name">Name</string>
+    <string name="register_name_label" translatable="false">/@yourname</string>
+    <string name="register_password">Password</string>
+    <string name="register_password_label" translatable="false">•••••••••</string>
+    <string name="register_accept_terms">I accept terms and conditions</string>
+    <string name="register_btn">Sign up</string>
+    <string name="register_sign_up">Create an account</string>
+    <string name="register_skip">Skip</string>
+    
+    <!-- Success Screen -->
+    <string name="success_title">Success</string>
+
+    <!-- Code Verification Screen -->
+    <string name="verification_title">Enter verification code</string>
+    <string name="verification_text">4-digit code was send to your email</string>
+    <string name="verification_verify_btn">Verify</string>
+    <string name="verification_wrong_code">Wrong code</string>
+    <string name="verification_resend_code">Resend code</string>
 </resources>

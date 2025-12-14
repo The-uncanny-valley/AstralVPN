@@ -15,11 +15,19 @@ private val DarkColorScheme = darkColorScheme(
     onPrimary = SilverChalice,
     background = EerieBlack,
     onBackground = White,
-    surface = SilverSand,
+    surface = SonicSilver,
+    primaryContainer = Purple,
+    onPrimaryContainer = White,
+    outline = SteelDust,
+    outlineVariant = Cyan,
+    error = LazerScarlet,
+    errorContainer = SonicSilver,
+    onErrorContainer = LazerScarlet,
     onSurface = MountbattenPink,
     onSurfaceVariant = GullGray,
     secondary = MagentaRed,
-    onSecondary = White
+    onSecondary = White,
+    tertiary = Purple
 )
 
 private val LightColorScheme = lightColorScheme(
