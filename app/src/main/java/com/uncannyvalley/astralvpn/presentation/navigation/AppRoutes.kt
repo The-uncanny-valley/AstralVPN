@@ -27,7 +27,10 @@ sealed class Screen(val route: String) {
     object AppIconScreen : Screen("icon")
     object ProfileScreen : Screen("profile")
     object RegisterScreen : Screen("register")
-    object VerificationScreen : Screen("verification")
+    object VerificationScreen : Screen("verification?email={email}") {
+        fun createRoute(email: String) = "verification?email=$email"
+    }
+
     object SuccessScreen : Screen("success")
 }
 
@@ -104,18 +107,21 @@ fun ProfileRoute(
 @Composable
 fun RegisterRoute(
     onBack: () -> Unit,
-    onRegisterSuccess: () -> Unit,
+    onRegisterSuccess: (String) -> Unit,
     viewModel: RegisterViewModel = hiltViewModel()
 ) {
     RegisterScreen(
         viewModel = viewModel,
-        onRegisterSuccess = onRegisterSuccess,
+        onRegisterSuccess = {
+            onRegisterSuccess(viewModel.uiState.value.email)
+        },
         onBack = onBack
     )
 }
 
 @Composable
 fun VerificationRoute(
+    email: String,
     onBack: () -> Unit,
     viewModel: VerificationViewModel = hiltViewModel(),
     onVerified: () -> Unit
@@ -132,6 +138,7 @@ fun VerificationRoute(
 
     VerificationScreen(
         uiState = uiState,
+        email = email,
         onCodeChange = viewModel::onCodeChange,
         onVerifyClick = viewModel::onVerifyClick,
         onBack = onBack

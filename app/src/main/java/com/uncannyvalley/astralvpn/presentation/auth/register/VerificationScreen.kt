@@ -53,6 +53,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun VerificationScreen(
     uiState: VerificationUiState,
+    email: String,
     onCodeChange: (String) -> Unit,
     onVerifyClick: () -> Unit,
     onBack: () -> Unit
@@ -93,7 +94,7 @@ fun VerificationScreen(
             Spacer(modifier = Modifier.height(22.dp))
 
             Text(
-                text = stringResource(R.string.verification_text),
+                text = stringResource(R.string.verification_text) + " $email",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onBackground
             )
@@ -295,7 +296,8 @@ fun VerificationScreenPreview() {
             uiState = previewVM.uiState.collectAsState().value,
             onCodeChange = {},
             onVerifyClick = {},
-            onBack = {}
+            onBack = {},
+            email = "yourname@gmail.com"
         )
     }
 }
