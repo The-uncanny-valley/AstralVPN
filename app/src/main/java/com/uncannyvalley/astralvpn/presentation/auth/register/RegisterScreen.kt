@@ -1,13 +1,17 @@
 package com.uncannyvalley.astralvpn.presentation.auth.register
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -22,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.uncannyvalley.astralvpn.R
+import com.uncannyvalley.astralvpn.presentation.components.AuthButton
 import com.uncannyvalley.astralvpn.presentation.theme.AstralVPNTheme
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -59,10 +64,10 @@ fun RegisterScreen(
                 .padding(start = 46.dp, end = 42.dp, top = 160.dp, bottom = 126.dp)
                 .padding(padding),
             verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.Start
         ) {
             Text(
-                text = stringResource(R.string.register_login),
+                text = stringResource(R.string.register_sign_up),
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onBackground
             )
@@ -80,10 +85,11 @@ fun RegisterScreen(
 
             OutlinedTextField(
                 value = uiState.email,
-                onValueChange = { },
+                onValueChange = { viewModel.onEmailChanged(it) },
                 label = { Text(stringResource(R.string.register_email_label)) },
-                modifier = Modifier
-                    .fillMaxWidth())
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp)
+            )
 
             Spacer(modifier = Modifier.height(12.dp))
 
@@ -97,10 +103,11 @@ fun RegisterScreen(
             Spacer(modifier = Modifier.height(6.dp))
 
             OutlinedTextField(
-                value = uiState.email,
-                onValueChange = { },
+                value = uiState.name,
+                onValueChange = { viewModel.onNameChanged(it) },
                 label = { Text(stringResource(R.string.register_name)) },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp)
             )
 
             Spacer(modifier = Modifier.height(12.dp))
@@ -115,14 +122,50 @@ fun RegisterScreen(
             Spacer(modifier = Modifier.height(6.dp))
 
             OutlinedTextField(
-                value = uiState.email,
-                onValueChange = { },
+                value = uiState.password,
+                onValueChange = { viewModel.onPasswordChanged(it) },
                 label = { Text(stringResource(R.string.register_password_label)) },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp)
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            TermsAgreementRow(
+                checked = uiState.termsAccepted,
+                onCheckedChange = { checked ->
+                    viewModel.onTermsChecked(checked) }
+            )
+
+            AuthButton(
+                text = "Sign up",
+                enabled = uiState.isSubmitEnabled,
+                onClick = { viewModel.onRegisterClick() }
+            )
         }
+    }
+}
+
+@Composable
+fun TermsAgreementRow(
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable { onCheckedChange(!checked) },
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Checkbox(
+            checked = checked,
+            onCheckedChange = onCheckedChange
+        )
+
+        Text(
+            text = stringResource(R.string.register_accept_terms),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onBackground
+        )
     }
 }
 
@@ -160,9 +203,7 @@ class FakeRegisterViewModel : RegisterViewModelInterface {
     override fun onNameChanged(value: String) {}
     override fun onPasswordChanged(value: String) {}
     override fun onTermsChecked(value: Boolean) {}
-    override fun onRegisterClick(
-        onSuppress: () -> Unit
-    ) {}
+    override fun onRegisterClick() {}
 }
 
 interface RegisterViewModelInterface {
@@ -173,5 +214,5 @@ interface RegisterViewModelInterface {
     fun onNameChanged(value: String)
     fun onPasswordChanged(value: String)
     fun onTermsChecked(value: Boolean)
-    fun onRegisterClick(onSuppress: () -> Unit)
+    fun onRegisterClick()
 }
