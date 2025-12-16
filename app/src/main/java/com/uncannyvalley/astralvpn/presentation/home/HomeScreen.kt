@@ -13,13 +13,17 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -29,10 +33,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -41,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import com.uncannyvalley.astralvpn.R
 import com.uncannyvalley.astralvpn.presentation.navigation.Screen
 import com.uncannyvalley.astralvpn.presentation.theme.AstralVPNTheme
+import com.uncannyvalley.astralvpn.presentation.theme.Purple
 
 @Composable
 fun HomeScreen(
@@ -158,47 +161,58 @@ fun BottomNavBar(
             .padding(bottom = 52.dp, end = 92.dp, start = 92.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        val homeSelected = current == Screen.HomeScreen.route
-        val settingsSelected = current == Screen.SettingsScreen.route
+        BottomNavItem(
+            iconRes = R.drawable.ic_home_unselected,
+            selected = current == Screen.HomeScreen.route,
+            onClick = onHomeClick
+        )
 
-        val interactionSource = remember { MutableInteractionSource() }
-
-        Box(
-            modifier = Modifier
-                .size(46.dp)
-                .clip(RectangleShape)
-                .clickable(
-                    indication = ripple(bounded = false),
-                    interactionSource = interactionSource,
-                    onClick = onHomeClick
-                ),
-            contentAlignment = Alignment.Center
-        ) {
-            val icon = if (homeSelected) R.drawable.ic_home_selected else R.drawable.ic_home_unselected
-            Icon(
-                painter = painterResource(icon),
-                contentDescription = null,
-                tint = Color.Unspecified,
-                modifier = Modifier.fillMaxSize()
-            )
-        }
-
-        Box(
-            modifier = Modifier
-                .size(42.dp)
-                .clip(RectangleShape)
-                .clickable(onClick = onSettingsClick),
-            contentAlignment = Alignment.Center
-        ) {
-            val icon = if (settingsSelected) R.drawable.ic_settings_selected else R.drawable.ic_settings_unselected
-            Icon(
-                painter = painterResource(icon),
-                contentDescription = null,
-                tint = Color.Unspecified,
-                modifier = Modifier.fillMaxSize()
-            )
-        }
+        BottomNavItem(
+            iconRes = R.drawable.ic_settings_unselected,
+            selected = current == Screen.SettingsScreen.route,
+            onClick = onSettingsClick
+        )
     }
+}
+
+@Composable
+fun BottomNavItem(
+    iconRes: Int,
+    selected: Boolean,
+    onClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .width(56.dp)
+            .height(72.dp)
+            .clickable(
+                indication = null,
+                interactionSource = remember { MutableInteractionSource() },
+                onClick = onClick
+            ),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Icon(
+            painter = painterResource(iconRes),
+            contentDescription = null,
+            tint = Color.Unspecified,
+            modifier = Modifier.size(46.dp)
+        )
+
+        Spacer(modifier = Modifier.height(2.dp))
+
+        Box(
+            modifier = Modifier
+                .width(42.dp)
+                .height(5.dp)
+                .background(
+                    color = Purple.copy(alpha = if (selected) 1f else 0f),
+                    shape = RoundedCornerShape(20.dp)
+                ),
+        )
+    }
+
 }
 
 @Preview(
