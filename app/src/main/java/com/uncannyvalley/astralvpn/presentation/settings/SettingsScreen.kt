@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -59,9 +60,18 @@ fun SettingsScreen(
                 ),
             contentAlignment = Alignment.Center
         ) {
+            val configuration = LocalConfiguration.current
+            val screenHeight = configuration.screenHeightDp.dp
+            val screenWidth = configuration.screenWidthDp.dp
+
             Box(
                 modifier = Modifier
-                    .padding(start = 24.dp, end = 24.dp, top = 112.dp, bottom = 160.dp)
+                    .padding(
+                        start = screenWidth * 0.06f,
+                        end = screenWidth * 0.06f,
+                        top = screenHeight * 0.12f,
+                        bottom = screenHeight * 0.1f
+                    )
                     .fillMaxSize()
                     .padding(padding)
                     .paint(
@@ -74,8 +84,8 @@ fun SettingsScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(start = 28.dp, end = 28.dp, top = 72.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                        .padding(horizontal = 48.dp, vertical = 48.dp),
+                    verticalArrangement = Arrangement.Top
                 ) {
                     val settingsActions = mapOf(
                         profile to onNavigateProfile,
