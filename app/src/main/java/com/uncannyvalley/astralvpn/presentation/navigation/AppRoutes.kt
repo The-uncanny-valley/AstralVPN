@@ -107,6 +107,7 @@ fun ProfileRoute(
 @Composable
 fun RegisterRoute(
     onBack: () -> Unit,
+    onContinueWithoutRegistration: () -> Unit,
     onRegisterSuccess: (String) -> Unit,
     viewModel: RegisterViewModel = hiltViewModel()
 ) {
@@ -115,7 +116,8 @@ fun RegisterRoute(
         onRegisterSuccess = {
             onRegisterSuccess(viewModel.uiState.value.email)
         },
-        onBack = onBack
+        onBack = onBack,
+        onContinueWithoutRegistration = onContinueWithoutRegistration
     )
 }
 

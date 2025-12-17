@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.uncannyvalley.astralvpn.R
 import com.uncannyvalley.astralvpn.presentation.components.AuthButton
+import com.uncannyvalley.astralvpn.presentation.components.CustomLineButton
 import com.uncannyvalley.astralvpn.presentation.theme.AstralVPNTheme
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,6 +38,7 @@ import kotlinx.coroutines.flow.StateFlow
 fun RegisterScreen(
     viewModel: RegisterViewModelInterface,
     onRegisterSuccess: () -> Unit,
+    onContinueWithoutRegistration: () -> Unit,
     onBack: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -124,6 +126,18 @@ fun RegisterScreen(
                 enabled = uiState.isSubmitEnabled,
                 onClick = { viewModel.onRegisterClick() }
             )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            CustomLineButton(
+                text = stringResource(R.string.register_log_in),
+                onClick = { /*TODO: implement login navigation later*/ }
+            )
+
+            CustomLineButton(
+                text = stringResource(R.string.register_skip),
+                onClick = onContinueWithoutRegistration
+            )
         }
     }
 }
@@ -166,7 +180,8 @@ fun RegisterScreenPreview() {
         RegisterScreen(
             onBack = {},
             onRegisterSuccess = {},
-            viewModel = FakeRegisterViewModel()
+            viewModel = FakeRegisterViewModel(),
+            onContinueWithoutRegistration = {}
         )
     }
 }
