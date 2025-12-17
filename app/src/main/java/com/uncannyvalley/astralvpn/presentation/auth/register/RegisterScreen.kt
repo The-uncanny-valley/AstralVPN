@@ -9,8 +9,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -20,9 +24,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.uncannyvalley.astralvpn.R
@@ -57,52 +65,70 @@ fun RegisterScreen(
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
+            .imePadding()
             .background(MaterialTheme.colorScheme.background)
     ) { padding ->
 
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(start = 46.dp, end = 42.dp, top = 160.dp, bottom = 126.dp)
+                .verticalScroll(rememberScrollState())
+                .imePadding()
+                .padding(
+                    start = 46.dp,
+                    end = 42.dp,
+                    top = 120.dp
+                )
                 .padding(padding),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.Start
         ) {
             Text(
-                text = stringResource(R.string.register_sign_up),
+                text = stringResource(R.string.register_title),
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onBackground
             )
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            Spacer(modifier = Modifier.height(6.dp))
+            key(uiState.email.isNotBlank()) {
+                OutlinedTextField(
+                    value = uiState.email,
+                    onValueChange = { viewModel.onEmailChanged(it) },
+                    label = { Text(stringResource(R.string.register_email_label)) },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp),
 
-            OutlinedTextField(
-                value = uiState.email,
-                onValueChange = { viewModel.onEmailChanged(it) },
-                label = { Text(stringResource(R.string.register_email_label)) },
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp)
-            )
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Email,
+                        imeAction = ImeAction.Next
+                    ),
+                    singleLine = true
+                )
+            }
 
-            Spacer(modifier = Modifier.height(12.dp))
-
-            Text(
-                text = stringResource(R.string.register_name),
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.align(Alignment.Start)
-            )
+            if (uiState.email.isNotBlank() && !uiState.isEmailValid) {
+                Text(
+                    text = "Enter a valid email address",
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
 
             Spacer(modifier = Modifier.height(18.dp))
 
             OutlinedTextField(
                 value = uiState.name,
                 onValueChange = { viewModel.onNameChanged(it) },
-                label = { Text(stringResource(R.string.register_name)) },
+                label = { Text(stringResource(R.string.register_name_label)) },
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(12.dp),
+
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Next
+                ),
+                singleLine = true
             )
 
             Spacer(modifier = Modifier.height(18.dp))
@@ -112,14 +138,26 @@ fun RegisterScreen(
                 onValueChange = { viewModel.onPasswordChanged(it) },
                 label = { Text(stringResource(R.string.register_password_label)) },
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(12.dp),
+
+                visualTransformation = PasswordVisualTransformation(),
+                
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Password,
+                    imeAction = ImeAction.Done
+                ),
+                singleLine = true
             )
+
+            Spacer(modifier = Modifier.height(8.dp))
 
             TermsAgreementRow(
                 checked = uiState.termsAccepted,
                 onCheckedChange = { checked ->
                     viewModel.onTermsChecked(checked) }
             )
+
+            Spacer(modifier = Modifier.height(8.dp))
 
             AuthButton(
                 text = "Sign up",
