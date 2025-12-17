@@ -72,14 +72,7 @@ fun RegisterScreen(
                 color = MaterialTheme.colorScheme.onBackground
             )
 
-            Spacer(modifier = Modifier.height(36.dp))
-
-            Text(
-                text = "Email",
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.align(Alignment.Start)
-            )
+            Spacer(modifier = Modifier.height(32.dp))
 
             Spacer(modifier = Modifier.height(6.dp))
 
@@ -100,7 +93,7 @@ fun RegisterScreen(
                 modifier = Modifier.align(Alignment.Start)
             )
 
-            Spacer(modifier = Modifier.height(6.dp))
+            Spacer(modifier = Modifier.height(18.dp))
 
             OutlinedTextField(
                 value = uiState.name,
@@ -110,16 +103,7 @@ fun RegisterScreen(
                 shape = RoundedCornerShape(12.dp)
             )
 
-            Spacer(modifier = Modifier.height(12.dp))
-
-            Text(
-                text = stringResource(R.string.register_password),
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.align(Alignment.Start)
-            )
-
-            Spacer(modifier = Modifier.height(6.dp))
+            Spacer(modifier = Modifier.height(18.dp))
 
             OutlinedTextField(
                 value = uiState.password,
