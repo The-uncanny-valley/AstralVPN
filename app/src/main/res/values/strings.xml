@@ -26,9 +26,10 @@
     
     <!-- Register Screen -->
     <string name="register_title">Create an account</string>
-    <string name="register_email_label" translatable="false">email</string>
-    <string name="register_name_label">name</string>
-    <string name="register_password_label">password</string>
+    <string name="register_email_label" translatable="false">Email</string>
+    <string name="register_email_error">Enter a valid email address</string>
+    <string name="register_name_label">Name</string>
+    <string name="register_password_label">Password</string>
     <string name="register_accept_terms">I accept terms and conditions</string>
     <string name="register_btn">Sign up</string>
     <string name="register_log_in">Log in</string>
