@@ -61,7 +61,13 @@ fun AstralNavHost(
                         Screen.VerificationScreen.createRoute(email)
                     )
                 },
-                onBack = { navController.popBackStack() }
+                onBack = { navController.popBackStack() },
+                onContinueWithoutRegistration = {
+                    navController.navigate(Screen.HomeScreen.route)
+                    {
+                        popUpTo(Screen.RegisterScreen.route) { inclusive = true }
+                    }
+                }
             )
         }
         composable(Screen.SuccessScreen.route) {

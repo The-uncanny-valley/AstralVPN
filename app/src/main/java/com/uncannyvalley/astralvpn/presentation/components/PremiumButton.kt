@@ -32,9 +32,12 @@ import com.uncannyvalley.astralvpn.presentation.theme.GraniteGray
 import com.uncannyvalley.astralvpn.presentation.theme.MagentaRed
 
 @Composable
-fun PremiumButton(onClick: () -> Unit) {
+fun PremiumButton(
+    modifier: Modifier,
+    onClick: () -> Unit
+) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .clip(RoundedCornerShape(40.dp))
             .border(
                 width = 1.dp,
@@ -83,5 +86,8 @@ fun PremiumButton(onClick: () -> Unit) {
 @Preview
 @Composable
 fun PremiumButtonPreview() {
-    PremiumButton(onClick = {})
+    PremiumButton(
+        modifier = Modifier,
+        onClick = {}
+    )
 }

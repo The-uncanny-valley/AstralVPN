@@ -25,15 +25,14 @@
     <string name="profile_btn_get_premium">Get Premium</string>
     
     <!-- Register Screen -->
-    <string name="register_title">Create Account</string>
-    <string name="register_email_label" translatable="false">yourname@gmail.com</string>
-    <string name="register_name">Name</string>
-    <string name="register_name_label" translatable="false">/@yourname</string>
-    <string name="register_password">Password</string>
-    <string name="register_password_label" translatable="false">•••••••••</string>
+    <string name="register_title">Create an account</string>
+    <string name="register_email_label" translatable="false">Email</string>
+    <string name="register_email_error">Enter a valid email address</string>
+    <string name="register_name_label">Name</string>
+    <string name="register_password_label">Password</string>
     <string name="register_accept_terms">I accept terms and conditions</string>
     <string name="register_btn">Sign up</string>
-    <string name="register_sign_up">Create an account</string>
+    <string name="register_log_in">Log in</string>
     <string name="register_skip">Skip</string>
     
     <!-- Success Screen -->

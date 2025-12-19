@@ -30,6 +30,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -80,10 +81,19 @@ private fun ProfileLoadedScreen(
                 )
                 .padding(padding)
         ) {
+            val configuration = LocalConfiguration.current
+            val screenHeight = configuration.screenHeightDp.dp
+            val screenWidth = configuration.screenWidthDp.dp
+
             // glass
             Box(
                 modifier = Modifier
-                    .padding(start = 24.dp, end = 24.dp, top = 112.dp, bottom = 86.dp)
+                    .padding(
+                        start = screenWidth * 0.06f,
+                        end = screenWidth * 0.06f,
+                        top = screenHeight * 0.12f,
+                        bottom = screenHeight * 0.1f
+                    )
                     .fillMaxSize()
                     .clip(RoundedCornerShape(16.dp))
                     .paint(
@@ -134,17 +144,19 @@ private fun ProfileLoadedScreen(
                         )
                     }
 
-                    Spacer(modifier = Modifier.height(76.dp))
+                    Spacer(modifier = Modifier.weight(0.4f))
 
                     val profileIcon = if (uiState.isPremium) R.drawable.ic_profile_premium
                     else R.drawable.ic_profile_normal
 
                     Image(
                         painter = painterResource(profileIcon),
-                        contentDescription = null
+                        contentDescription = null,
+                        modifier = Modifier.size(screenHeight * 0.15f)
                     )
 
-                    Spacer(modifier = Modifier.height(36.dp))
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.weight(0.1f))
 
                     Text(
                         text = uiState.userName,
@@ -152,7 +164,8 @@ private fun ProfileLoadedScreen(
                         color = MaterialTheme.colorScheme.onPrimary
                     )
 
-                    Spacer(modifier = Modifier.weight(1f))
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Spacer(modifier = Modifier.weight(0.6f))
 
                     Text(
                         text = if (uiState.isPremium) stringResource(
@@ -163,7 +176,7 @@ private fun ProfileLoadedScreen(
                         textAlign = TextAlign.Center
                     )
 
-                    Spacer(modifier = Modifier.height(32.dp))
+                    Spacer(modifier = Modifier.height(22.dp))
 
                     if (!uiState.isPremium) {
                         Box(
@@ -182,11 +195,15 @@ private fun ProfileLoadedScreen(
                                 contentScale = ContentScale.Fit
                             )
 
-                            PremiumButton(onClick = onGetPremiumClick)
+                            PremiumButton(
+                                modifier = Modifier
+                                    .height(screenHeight * 0.065f),
+                                onClick = onGetPremiumClick
+                            )
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Spacer(modifier = Modifier.weight(0.2f))
                 }
             }
         }

@@ -19,6 +19,7 @@ import com.uncannyvalley.astralvpn.presentation.screen.AppIconScreen
 import com.uncannyvalley.astralvpn.presentation.screen.HelpScreen
 import com.uncannyvalley.astralvpn.presentation.screen.ProfileScreen
 import com.uncannyvalley.astralvpn.presentation.settings.SettingsScreen
+import kotlinx.coroutines.delay
 
 sealed class Screen(val route: String) {
     object HomeScreen : Screen("home")
@@ -65,6 +66,7 @@ fun HomeRoute(
                 is HomeUiState.Normal -> viewModel.onConnectClicked()
                 is HomeUiState.Connected,
                 is HomeUiState.Connecting -> viewModel.onDisconnectClicked()
+
                 is HomeUiState.Error -> viewModel.onDisconnectClicked()
                 HomeUiState.NoInternet -> viewModel.refreshConnectionStatus()
             }
@@ -107,6 +109,7 @@ fun ProfileRoute(
 @Composable
 fun RegisterRoute(
     onBack: () -> Unit,
+    onContinueWithoutRegistration: () -> Unit,
     onRegisterSuccess: (String) -> Unit,
     viewModel: RegisterViewModel = hiltViewModel()
 ) {
@@ -115,7 +118,8 @@ fun RegisterRoute(
         onRegisterSuccess = {
             onRegisterSuccess(viewModel.uiState.value.email)
         },
-        onBack = onBack
+        onBack = onBack,
+        onContinueWithoutRegistration = onContinueWithoutRegistration
     )
 }
 
@@ -150,7 +154,7 @@ fun SuccessRoute(
     onFinished: () -> Unit
 ) {
     LaunchedEffect(Unit) {
-        kotlinx.coroutines.delay(1500)
+        delay(1500)
         onFinished()
     }
 

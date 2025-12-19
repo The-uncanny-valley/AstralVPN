@@ -15,12 +15,11 @@
     <string name="profile_text_free_plan">Вы используете бесплатную версию приложения. Чтобы получить доступ к дополнительным возможностям, оформите премиум-подписку.</string>
     <string name="profile_text_premium">Вы используете Premium-версию приложения</string>
     <string name="profile_btn_get_premium">Премиум-версия</string>
-    <string name="register_title">Создать аккаунт</string>
-    <string name="register_name">Имя</string>
-    <string name="register_password">Пароль</string>
+    <string name="register_password_label">Пароль</string>
     <string name="register_accept_terms">Я принимаю пользовательское соглашение</string>
     <string name="register_btn">Зарегистрироваться</string>
-    <string name="register_sign_up">Войти в существующий аккаунт</string>
+    <string name="register_title">Войти в существующий аккаунт</string>
+    <string name="register_log_in">У меня уже есть аккаунт</string>
     <string name="register_skip">Продолжить без регистрации</string>
     <string name="success_title">Успешно</string>
     <string name="verification_title">Введите код подтверждения</string>
@@ -28,4 +27,6 @@
     <string name="verification_verify_btn">ПОДТВЕРДИТЬ</string>
     <string name="verification_wrong_code">Неверный код</string>
     <string name="verification_resend_code">Отправить код повторно</string>
+    <string name="register_email_error">Введите правильный адрес электронной почты</string>
+    <string name="register_name_label">Имя</string>
 </resources>
