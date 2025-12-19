@@ -47,6 +47,7 @@ fun CustomLineButton(
             Text(
                 text = text,
                 style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(vertical = 2.dp)
             )
         }
