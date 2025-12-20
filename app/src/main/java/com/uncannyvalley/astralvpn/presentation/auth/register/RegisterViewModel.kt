@@ -40,13 +40,7 @@ class RegisterViewModel @Inject constructor(
     }
 
     private fun update(reducer: (RegisterUiState) -> RegisterUiState) {
-        _uiState.update { old ->
-            val newState = reducer(old)
-            newState.copy(
-                isButtonEnabled = newState.email.isNotBlank() && newState.name.isNotBlank() &&
-                newState.password.length >= 5 && newState.termsAccepted
-            )
-        }
+        _uiState.update(reducer)
     }
 
     override fun onRegisterClick() {
