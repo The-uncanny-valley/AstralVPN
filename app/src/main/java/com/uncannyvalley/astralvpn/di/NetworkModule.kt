@@ -2,7 +2,6 @@ package com.uncannyvalley.astralvpn.di
 
 import android.content.Context
 import com.uncannyvalley.astralvpn.data.connectivity.NetworkConnectivityObserver
-import com.uncannyvalley.astralvpn.data.remote.AuthApi
 import com.uncannyvalley.astralvpn.domain.ConnectivityObserver
 import dagger.Module
 import dagger.Provides
@@ -30,11 +29,5 @@ class NetworkModule {
             .baseUrl("https:your.api.url/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-    }
-
-    @Provides
-    @Singleton
-    fun provideAuthApi(retrofit: Retrofit): AuthApi {
-        return retrofit.create(AuthApi::class.java)
     }
 }
