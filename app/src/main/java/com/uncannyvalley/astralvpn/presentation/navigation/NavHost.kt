@@ -62,6 +62,7 @@ fun AstralNavHost(
                     )
                 },
                 onBack = { navController.popBackStack() },
+                onLoginClick = { navController.navigate(Screen.LoginScreen.route) },
                 onContinueWithoutRegistration = {
                     navController.navigate(Screen.HomeScreen.route)
                     {
@@ -99,6 +100,28 @@ fun AstralNavHost(
                     }
                 },
                 onBack = { navController.popBackStack() }
+            )
+        }
+        composable(route = Screen.LoginScreen.route) {
+            LoginRoute(
+                onLoginSuccess = {
+                    navController.navigate(Screen.HomeScreen.route) {
+                        popUpTo(Screen.SuccessScreen.route) { inclusive = true }
+                    }
+                },
+                onBack = { navController.popBackStack() },
+                onContinueWithoutRegistration = {
+                    navController.navigate(Screen.HomeScreen.route)
+                    {
+                        popUpTo(Screen.RegisterScreen.route) { inclusive = true }
+                    }
+                },
+                onRegisterClick =
+                    {
+                        navController.navigate(Screen.RegisterScreen.route) {
+                            popUpTo(Screen.LoginScreen.route) { inclusive = true }
+                        }
+                    }
             )
         }
     }

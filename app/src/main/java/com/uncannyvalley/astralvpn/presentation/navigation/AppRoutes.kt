@@ -5,6 +5,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.uncannyvalley.astralvpn.presentation.auth.login.LoginScreen
+import com.uncannyvalley.astralvpn.presentation.auth.login.LoginViewModel
 import com.uncannyvalley.astralvpn.presentation.auth.register.RegisterScreen
 import com.uncannyvalley.astralvpn.presentation.auth.register.RegisterViewModel
 import com.uncannyvalley.astralvpn.presentation.auth.register.SuccessScreen
@@ -31,6 +33,7 @@ sealed class Screen(val route: String) {
     object VerificationScreen : Screen("verification?email={email}") {
         fun createRoute(email: String) = "verification?email=$email"
     }
+    object LoginScreen : Screen("login")
 
     object SuccessScreen : Screen("success")
 }
@@ -109,6 +112,7 @@ fun ProfileRoute(
 @Composable
 fun RegisterRoute(
     onBack: () -> Unit,
+    onLoginClick: () -> Unit,
     onContinueWithoutRegistration: () -> Unit,
     onRegisterSuccess: (String) -> Unit,
     viewModel: RegisterViewModel = hiltViewModel()
@@ -119,7 +123,25 @@ fun RegisterRoute(
             onRegisterSuccess(viewModel.uiState.value.email)
         },
         onBack = onBack,
+        onLoginClick = onLoginClick,
         onContinueWithoutRegistration = onContinueWithoutRegistration
+    )
+}
+
+@Composable
+fun LoginRoute(
+    onBack: () -> Unit,
+    onRegisterClick: () -> Unit,
+    onContinueWithoutRegistration: () -> Unit,
+    onLoginSuccess: () -> Unit,
+    viewModel: LoginViewModel = hiltViewModel()
+) {
+    LoginScreen(
+        viewModel = viewModel,
+        onLoginSuccess = { onLoginSuccess() },
+        onBack = onBack,
+        onContinueWithoutRegistration = onContinueWithoutRegistration,
+        onRegisterClick = onRegisterClick
     )
 }
 

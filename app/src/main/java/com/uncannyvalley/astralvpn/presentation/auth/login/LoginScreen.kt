@@ -52,6 +52,7 @@ import kotlinx.coroutines.flow.StateFlow
 fun LoginScreen(
     viewModel: LoginViewModelInterface,
     onRegisterSuccess: () -> Unit,
+    onLoginSuccess: () -> Unit,
     onContinueWithoutRegistration: () -> Unit,
     onBack: () -> Unit
 ) {
@@ -62,6 +63,7 @@ fun LoginScreen(
         viewModel.events.collect { event ->
             when (event) {
                 LoginEvent.Success -> { /* unused for now */ }
+                LoginEvent.Success -> onLoginSuccess()
             }
         }
     }
@@ -220,7 +222,7 @@ fun LoginScreenPreview() {
     AstralVPNTheme(darkTheme = true) {
         LoginScreen(
             onBack = {},
-            onRegisterSuccess = {},
+            onLoginSuccess = {},
             viewModel = FakeLoginViewModel(),
             onContinueWithoutRegistration = {}
         )
