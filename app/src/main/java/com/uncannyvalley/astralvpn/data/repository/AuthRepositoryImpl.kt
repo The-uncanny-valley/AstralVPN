@@ -26,4 +26,13 @@ class AuthRepositoryImpl @Inject constructor(
     } catch (e: Exception) {
         Result.failure(e)
     }
+
+    override suspend fun login(
+        email: String,
+        password: String
+    ): Result<Unit> = runCatching {
+        firebaseAuth
+            .signInWithEmailAndPassword(email, password)
+            .await()
+    }
 }
