@@ -8,7 +8,6 @@ data class RegisterUiState(
     val password: String = "",
     val termsAccepted: Boolean = false,
     val isLoading: Boolean = false,
-    val isButtonEnabled: Boolean = false,
     val errorMessage: String? = null
 ) {
     val isEmailValid: Boolean
