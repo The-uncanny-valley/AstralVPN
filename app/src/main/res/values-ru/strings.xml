@@ -35,4 +35,6 @@
     <string name="login_email_error">Введите правильный адрес электронной почты</string>
     <string name="login_password_label">Пароль</string>
     <string name="login_title">Войти в существующий профиль</string>
+    <string name="check_email_title">" Проверьте входящие"</string>
+    <string name="check_email_text">Ссылка для подтверждения была отправлена на вашу почту</string>
 </resources>
