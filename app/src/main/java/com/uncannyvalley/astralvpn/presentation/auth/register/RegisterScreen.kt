@@ -26,7 +26,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -131,35 +130,33 @@ fun RegisterScreen(
 
             Spacer(modifier = Modifier.height(18.dp))
 
-            key(uiState.email.isNotBlank()) {
-                OutlinedTextField(
-                    value = uiState.email,
-                    onValueChange = { viewModel.onEmailChanged(it) },
-                    label = {
-                        Text(
-                            text = stringResource(R.string.register_email_label),
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
+            OutlinedTextField(
+                value = uiState.email,
+                onValueChange = { viewModel.onEmailChanged(it) },
+                label = {
+                    Text(
+                        text = stringResource(R.string.register_email_label),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                },
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
 
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Email,
-                        imeAction = ImeAction.Next
-                    ),
-                    singleLine = true,
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Next
+                ),
+                singleLine = true,
 
-                    leadingIcon = {
-                        Icon(
-                            painter = painterResource(R.drawable.ic_email),
-                            contentDescription = null,
-                            tint = Color.Unspecified,
-                            modifier = Modifier.padding(start = 12.dp)
-                        )
-                    }
-                )
-            }
+                leadingIcon = {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_email),
+                        contentDescription = null,
+                        tint = Color.Unspecified,
+                        modifier = Modifier.padding(start = 12.dp)
+                    )
+                }
+            )
 
             if (uiState.email.isNotBlank() && !uiState.isEmailValid) {
                 Spacer(modifier = Modifier.height(4.dp))
