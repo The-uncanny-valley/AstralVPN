@@ -57,7 +57,7 @@ class RegisterViewModel @Inject constructor(
             )
 
             if (result.isSuccess) {
-                _events.emit(RegisterEvent.CodeSent)
+                _events.emit(RegisterEvent.VerificationEmailSent)
             } else {
                 update { it.copy(errorMessage = "Registration failed") }
             }
@@ -67,7 +67,6 @@ class RegisterViewModel @Inject constructor(
 }
 
 sealed class RegisterEvent {
-    data object CodeSent : RegisterEvent()
     data class Error(val reason: String)
-    data object Success : RegisterEvent()
+    data object VerificationEmailSent : RegisterEvent()
 }
