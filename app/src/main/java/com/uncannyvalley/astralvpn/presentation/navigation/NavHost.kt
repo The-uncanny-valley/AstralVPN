@@ -56,10 +56,10 @@ fun AstralNavHost(
         }
         composable(Screen.RegisterScreen.route) {
             RegisterRoute(
-                onRegisterSuccess = { email ->
-                    navController.navigate(
-                        Screen.VerificationScreen.createRoute(email)
-                    )
+                onEmailSent = { email ->
+                    navController.navigate(Screen.CheckEmailScreen.createRoute(email)) {
+                        launchSingleTop = true
+                    }
                 },
                 onBack = { navController.popBackStack() },
                 onLoginClick = { navController.navigate(Screen.LoginScreen.route) },
@@ -69,6 +69,25 @@ fun AstralNavHost(
                         popUpTo(Screen.RegisterScreen.route) { inclusive = true }
                     }
                 }
+            )
+        }
+        composable(
+            route = Screen.CheckEmailScreen.route,
+            arguments = listOf(
+                navArgument("email") { type = NavType.StringType }
+            )
+        ) { backStackEntry ->
+            val email = backStackEntry.arguments
+                ?.getString("email")
+                .orEmpty()
+            CheckEmailRoute(
+                email = email,
+                onVerified = {
+                    navController.navigate(Screen.SuccessScreen.route) {
+                        popUpTo(Screen.RegisterScreen.route) { inclusive = true }
+                    }
+                },
+                onBack = { navController.popBackStack() }
             )
         }
         composable(Screen.SuccessScreen.route) {
