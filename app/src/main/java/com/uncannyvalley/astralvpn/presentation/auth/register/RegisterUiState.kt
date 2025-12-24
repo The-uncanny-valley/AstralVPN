@@ -14,7 +14,7 @@ data class RegisterUiState(
         get() = isValidEmail(email)
 
     val isPasswordValid: Boolean
-        get() = password.length >= 8
+        get() = password.length >= 5
 
     val isSubmitEnabled: Boolean
         get() = isEmailValid &&
