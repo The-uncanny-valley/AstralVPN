@@ -54,7 +54,7 @@ import kotlinx.coroutines.flow.StateFlow
 @Composable
 fun RegisterScreen(
     viewModel: RegisterViewModelInterface,
-    onRegisterSuccess: () -> Unit,
+    onEmailSend: () -> Unit,
     onLoginClick: () -> Unit,
     onContinueWithoutRegistration: () -> Unit,
     onBack: () -> Unit
@@ -65,11 +65,7 @@ fun RegisterScreen(
     LaunchedEffect(viewModel.events) {
         viewModel.events.collect { event ->
             when (event) {
-                is RegisterEvent.CodeSent ->
-                    onRegisterSuccess()
-
-                RegisterEvent.Success -> { /* unused for now */
-                }
+                RegisterEvent.VerificationEmailSent -> onEmailSend()
             }
         }
     }
@@ -296,7 +292,7 @@ fun RegisterScreenPreview() {
     AstralVPNTheme(darkTheme = true) {
         RegisterScreen(
             onBack = {},
-            onRegisterSuccess = {},
+            onEmailSend = {},
             viewModel = FakeRegisterViewModel(),
             onContinueWithoutRegistration = {},
             onLoginClick = {}
