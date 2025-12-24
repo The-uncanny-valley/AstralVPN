@@ -232,7 +232,7 @@ fun RegisterScreen(
             Spacer(modifier = Modifier.height(8.dp))
 
             AuthButton(
-                text = "Sign up",
+                text = stringResource(R.string.register_btn),
                 enabled = uiState.isSubmitEnabled,
                 onClick = { viewModel.onRegisterClick() }
             )
