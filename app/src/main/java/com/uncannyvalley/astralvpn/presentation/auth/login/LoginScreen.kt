@@ -97,7 +97,6 @@ fun LoginScreen(
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            key(uiState.email.isNotBlank()) {
                 OutlinedTextField(
                     value = uiState.email,
                     onValueChange = { viewModel.onEmailChanged(it) },
@@ -125,7 +124,6 @@ fun LoginScreen(
                         )
                     }
                 )
-            }
 
             if (uiState.email.isNotBlank() && !uiState.isEmailValid) {
                 Spacer(modifier = Modifier.height(4.dp))
