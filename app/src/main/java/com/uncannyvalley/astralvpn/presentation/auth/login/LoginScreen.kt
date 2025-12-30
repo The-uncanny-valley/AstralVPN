@@ -51,8 +51,8 @@ import kotlinx.coroutines.flow.StateFlow
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModelInterface,
-    onRegisterSuccess: () -> Unit,
     onLoginSuccess: () -> Unit,
+    onRegisterClick: () -> Unit,
     onContinueWithoutRegistration: () -> Unit,
     onBack: () -> Unit
 ) {
@@ -199,7 +199,7 @@ fun LoginScreen(
 
             CustomLineButton(
                 text = stringResource(R.string.login_register),
-                onClick = { /*TODO: implement register navigation later*/ }
+                onClick = onRegisterClick
             )
 
             CustomLineButton(
@@ -222,7 +222,8 @@ fun LoginScreenPreview() {
             onBack = {},
             onLoginSuccess = {},
             viewModel = FakeLoginViewModel(),
-            onContinueWithoutRegistration = {}
+            onContinueWithoutRegistration = {},
+            onRegisterClick = {}
         )
     }
 }
