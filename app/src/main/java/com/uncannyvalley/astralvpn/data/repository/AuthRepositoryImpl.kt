@@ -1,23 +1,43 @@
 package com.uncannyvalley.astralvpn.data.repository
 
-import com.uncannyvalley.astralvpn.data.remote.AuthApi
+import com.google.firebase.auth.FirebaseAuth
 import com.uncannyvalley.astralvpn.domain.repository.AuthRepository
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
-     private val api: AuthApi
+    private val firebaseAuth: FirebaseAuth
 ) : AuthRepository {
 
     override suspend fun register(
         email: String,
         name: String,
         password: String
-    ): Result<Unit> {
-        return try {
-            api.register(email, name, password)
-            Result.success(Unit)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    ): Result<Unit> = try {
+        firebaseAuth
+            .createUserWithEmailAndPassword(email, password)
+            .await()
+
+        firebaseAuth.currentUser
+            ?.sendEmailVerification()
+            ?.await()
+
+        Result.success(Unit)
+    } catch (e: Exception) {
+        Result.failure(e)
+    }
+
+    override suspend fun login(
+        email: String,
+        password: String
+    ): Result<Unit> = runCatching {
+        firebaseAuth
+            .signInWithEmailAndPassword(email, password)
+            .await()
+    }
+
+    override suspend fun isEmailVerified(email: String): Boolean {
+        val user = FirebaseAuth.getInstance().currentUser
+        return user?.isEmailVerified ?: false
     }
 }

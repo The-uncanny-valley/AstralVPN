@@ -6,4 +6,11 @@ interface AuthRepository {
         name: String,
         password: String
     ): Result<Unit>
+
+    suspend fun login(
+        email: String,
+        password: String
+    ): Result<Unit>
+
+    suspend fun isEmailVerified(email: String): Boolean
 }

@@ -1,10 +1,8 @@
-package com.uncannyvalley.astralvpn.presentation.auth.register
+package com.uncannyvalley.astralvpn.presentation.auth.login
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,7 +13,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -26,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -51,10 +49,10 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
-fun RegisterScreen(
-    viewModel: RegisterViewModelInterface,
-    onEmailSend: () -> Unit,
-    onLoginClick: () -> Unit,
+fun LoginScreen(
+    viewModel: LoginViewModelInterface,
+    onLoginSuccess: () -> Unit,
+    onRegisterClick: () -> Unit,
     onContinueWithoutRegistration: () -> Unit,
     onBack: () -> Unit
 ) {
@@ -64,7 +62,8 @@ fun RegisterScreen(
     LaunchedEffect(viewModel.events) {
         viewModel.events.collect { event ->
             when (event) {
-                RegisterEvent.VerificationEmailSent -> onEmailSend()
+                LoginEvent.Success -> { /* unused for now */ }
+                LoginEvent.Success -> onLoginSuccess()
             }
         }
     }
@@ -91,77 +90,45 @@ fun RegisterScreen(
             horizontalAlignment = Alignment.Start
         ) {
             Text(
-                text = stringResource(R.string.register_title),
+                text = stringResource(R.string.login_title),
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onBackground
             )
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            OutlinedTextField(
-                value = uiState.name,
-                onValueChange = { viewModel.onNameChanged(it) },
-                label = {
-                    Text(
-                        text = stringResource(R.string.register_name_label),
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                },
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
+                OutlinedTextField(
+                    value = uiState.email,
+                    onValueChange = { viewModel.onEmailChanged(it) },
+                    label = {
+                        Text(
+                            text = stringResource(R.string.login_email_label),
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp),
 
-                keyboardOptions = KeyboardOptions(
-                    autoCorrectEnabled = false,
-                    keyboardType = KeyboardType.Text,
-                    imeAction = ImeAction.Next
-                ),
-                visualTransformation = VisualTransformation.None,
-                singleLine = true,
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Email,
+                        imeAction = ImeAction.Next
+                    ),
+                    singleLine = true,
 
-                leadingIcon = {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_user),
-                        contentDescription = null,
-                        tint = Color.Unspecified,
-                        modifier = Modifier.padding(start = 12.dp)
-                    )
-                }
-            )
-
-            Spacer(modifier = Modifier.height(18.dp))
-
-            OutlinedTextField(
-                value = uiState.email,
-                onValueChange = { viewModel.onEmailChanged(it) },
-                label = {
-                    Text(
-                        text = stringResource(R.string.register_email_label),
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                },
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
-
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Email,
-                    imeAction = ImeAction.Next
-                ),
-                singleLine = true,
-
-                leadingIcon = {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_email),
-                        contentDescription = null,
-                        tint = Color.Unspecified,
-                        modifier = Modifier.padding(start = 12.dp)
-                    )
-                }
-            )
+                    leadingIcon = {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_email),
+                            contentDescription = null,
+                            tint = Color.Unspecified,
+                            modifier = Modifier.padding(start = 12.dp)
+                        )
+                    }
+                )
 
             if (uiState.email.isNotBlank() && !uiState.isEmailValid) {
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = stringResource(R.string.register_email_error),
+                    text = stringResource(R.string.login_email_error),
                     color = MaterialTheme.colorScheme.error,
                     style = MaterialTheme.typography.bodySmall.copy(fontSize = 10.sp),
                     modifier = Modifier.padding(horizontal = 4.dp)
@@ -185,7 +152,7 @@ fun RegisterScreen(
                 shape = RoundedCornerShape(12.dp),
 
                 visualTransformation = if (passwordVisible) VisualTransformation.None
-                        else PasswordVisualTransformation(),
+                else PasswordVisualTransformation(),
 
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,
@@ -220,109 +187,63 @@ fun RegisterScreen(
                 }
             )
 
-            Spacer(modifier = Modifier.height(8.dp))
-
-            TermsAgreementRow(
-                checked = uiState.termsAccepted,
-                onCheckedChange = { checked ->
-                    viewModel.onTermsChecked(checked)
-                }
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(28.dp))
 
             AuthButton(
-                text = stringResource(R.string.register_btn),
+                text = stringResource(R.string.login_btn),
                 enabled = uiState.isSubmitEnabled,
-                onClick = { viewModel.onRegisterClick() }
+                onClick = { viewModel.onLoginClick() }
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
             CustomLineButton(
-                text = stringResource(R.string.register_log_in),
-                onClick = onLoginClick
+                text = stringResource(R.string.login_register),
+                onClick = onRegisterClick
             )
 
             CustomLineButton(
-                text = stringResource(R.string.register_skip),
+                text = stringResource(R.string.login_skip),
                 onClick = onContinueWithoutRegistration
             )
         }
     }
 }
 
-@Composable
-fun TermsAgreementRow(
-    checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .clickable { onCheckedChange(!checked) },
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Checkbox(
-            checked = checked,
-            onCheckedChange = onCheckedChange
-        )
-
-        Text(
-            text = stringResource(R.string.register_accept_terms),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-    }
-}
-
 @Preview(showBackground = true)
 @Composable
-fun RegisterScreenPreview() {
-    val fakeState = RegisterUiState(
-        email = "",
-        name = "",
-        password = "",
-        termsAccepted = false
-    )
+fun LoginScreenPreview() {
     AstralVPNTheme(darkTheme = true) {
-        RegisterScreen(
+        LoginScreen(
             onBack = {},
-            onEmailSend = {},
-            viewModel = FakeRegisterViewModel(),
+            onLoginSuccess = {},
+            viewModel = FakeLoginViewModel(),
             onContinueWithoutRegistration = {},
-            onLoginClick = {}
+            onRegisterClick = {}
         )
     }
 }
 
-class FakeRegisterViewModel : RegisterViewModelInterface {
+class FakeLoginViewModel : LoginViewModelInterface {
     private val _uiState = MutableStateFlow(
-        RegisterUiState(
+        LoginUiState(
             email = "",
-            name = "",
-            password = "",
-            termsAccepted = false
+            password = ""
         )
     )
-    override val uiState: StateFlow<RegisterUiState> = _uiState
-    override val events = MutableSharedFlow<RegisterEvent>()
+    override val uiState: StateFlow<LoginUiState> = _uiState
+    override val events = MutableSharedFlow<LoginEvent>()
 
     override fun onEmailChanged(value: String) {}
-    override fun onNameChanged(value: String) {}
     override fun onPasswordChanged(value: String) {}
-    override fun onTermsChecked(value: Boolean) {}
-    override fun onRegisterClick() {}
+    override fun onLoginClick() {}
 }
 
-interface RegisterViewModelInterface {
-    val uiState: StateFlow<RegisterUiState>
-    val events: SharedFlow<RegisterEvent>
+interface LoginViewModelInterface {
+    val uiState: StateFlow<LoginUiState>
+    val events: SharedFlow<LoginEvent>
 
     fun onEmailChanged(value: String)
-    fun onNameChanged(value: String)
     fun onPasswordChanged(value: String)
-    fun onTermsChecked(value: Boolean)
-    fun onRegisterClick()
+    fun onLoginClick()
 }

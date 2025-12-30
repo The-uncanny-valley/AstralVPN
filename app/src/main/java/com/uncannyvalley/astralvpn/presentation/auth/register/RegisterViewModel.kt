@@ -40,13 +40,7 @@ class RegisterViewModel @Inject constructor(
     }
 
     private fun update(reducer: (RegisterUiState) -> RegisterUiState) {
-        _uiState.update { old ->
-            val newState = reducer(old)
-            newState.copy(
-                isButtonEnabled = newState.email.isNotBlank() && newState.name.isNotBlank() &&
-                newState.password.length >= 5 && newState.termsAccepted
-            )
-        }
+        _uiState.update(reducer)
     }
 
     override fun onRegisterClick() {
@@ -63,7 +57,7 @@ class RegisterViewModel @Inject constructor(
             )
 
             if (result.isSuccess) {
-                _events.emit(RegisterEvent.CodeSent)
+                _events.emit(RegisterEvent.VerificationEmailSent)
             } else {
                 update { it.copy(errorMessage = "Registration failed") }
             }
@@ -73,7 +67,6 @@ class RegisterViewModel @Inject constructor(
 }
 
 sealed class RegisterEvent {
-    data object CodeSent : RegisterEvent()
     data class Error(val reason: String)
-    data object Success : RegisterEvent()
+    data object VerificationEmailSent : RegisterEvent()
 }

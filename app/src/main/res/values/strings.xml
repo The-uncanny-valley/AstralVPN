@@ -34,7 +34,16 @@
     <string name="register_btn">Sign up</string>
     <string name="register_log_in">Log in</string>
     <string name="register_skip">Skip</string>
-    
+
+    <!-- Login Screen -->
+    <string name="login_title">Log in</string>
+    <string name="login_email_label" translatable="false">Email</string>
+    <string name="login_email_error">Enter a valid email address</string>
+    <string name="login_password_label">Password</string>
+    <string name="login_btn">Log in</string>
+    <string name="login_register">Create an account</string>
+    <string name="login_skip">Skip</string>
+
     <!-- Success Screen -->
     <string name="success_title">Success</string>
 
@@ -44,4 +53,8 @@
     <string name="verification_verify_btn">Verify</string>
     <string name="verification_wrong_code">Wrong code</string>
     <string name="verification_resend_code">Resend code</string>
+
+    <!-- Check Email Screen -->
+    <string name="check_email_title">Check your inbox</string>
+    <string name="check_email_text">A verification link has been sent to your email</string>
 </resources>

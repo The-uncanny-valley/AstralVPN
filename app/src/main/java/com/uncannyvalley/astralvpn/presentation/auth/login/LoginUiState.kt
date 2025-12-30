@@ -1,12 +1,10 @@
-package com.uncannyvalley.astralvpn.presentation.auth.register
+package com.uncannyvalley.astralvpn.presentation.auth.login
 
 import com.uncannyvalley.astralvpn.presentation.utils.isValidEmail
 
-data class RegisterUiState(
+data class LoginUiState(
     val email: String = "",
-    val name: String = "",
     val password: String = "",
-    val termsAccepted: Boolean = false,
     val isLoading: Boolean = false,
     val errorMessage: String? = null
 ) {
@@ -18,8 +16,6 @@ data class RegisterUiState(
 
     val isSubmitEnabled: Boolean
         get() = isEmailValid &&
-                name.isNotBlank() &&
                 isPasswordValid &&
-                termsAccepted &&
                 !isLoading
 }
