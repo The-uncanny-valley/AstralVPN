@@ -213,10 +213,6 @@ fun LoginScreen(
 @Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview() {
-    val fakeState = LoginUiState(
-        email = "",
-        password = ""
-    )
     AstralVPNTheme(darkTheme = true) {
         LoginScreen(
             onBack = {},
