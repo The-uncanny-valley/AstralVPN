@@ -57,4 +57,15 @@
     <!-- Check Email Screen -->
     <string name="check_email_title">Check your inbox</string>
     <string name="check_email_text">A verification link has been sent to your email</string>
+
+    <!-- Premium Screen -->
+    <string name="premium_title">Get Premium</string>
+    <string name="premium_text">Split Tunneling\nMultiple Payment Methods\nCancel subscription any time</string>
+    <string name="premium_year_plan">1 year</string>
+    <string name="premium_month_plan">1 month</string>
+    <string name="premium_ic_chosen">chosen</string>
+    <string name="premium_ic_not_chosen">not chosen</string>
+    <string name="premium_get_premium_btn">Subscribe</string>
+    <string name="premium_enter_promo_code">Enter promo code</string>
+    <string name="premium_terms_and_conditions">Terms and conditions</string>
 </resources>
