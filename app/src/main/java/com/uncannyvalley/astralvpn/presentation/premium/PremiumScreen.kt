@@ -42,7 +42,6 @@ fun PremiumScreen(
             .background(MaterialTheme.colorScheme.background)
     ) { padding ->
 
-
         Column(
             modifier = Modifier.padding(38.dp),
             verticalArrangement = Arrangement.Top,
@@ -69,15 +68,17 @@ fun PremiumScreen(
             Spacer(modifier = Modifier.height(48.dp))
 
             SubscriptionPlan(
-                chosen = true,
+                chosen = uiState is PremiumUiState.YearPlan,
                 text = stringResource(R.string.premium_year_plan),
-                onClick = { }
+                onClick = {
+                    onPlanSelected(PremiumUiState.YearPlan)
+                }
             )
 
             Spacer(modifier = Modifier.height(12.dp))
 
             SubscriptionPlan(
-                chosen = false,
+                chosen = uiState is PremiumUiState.MonthPlan,
                 text = stringResource(R.string.premium_month_plan),
                 onClick = {
                     onPlanSelected(PremiumUiState.MonthPlan)
@@ -89,7 +90,7 @@ fun PremiumScreen(
             SubscribeButton(
                 text = stringResource(R.string.premium_get_premium_btn),
                 onClick = {
-                    onPlanSelected(PremiumUiState.YearPlan)
+                    onPlanSelected(uiState)
                 },
                 modifier = Modifier
             )
@@ -119,7 +120,7 @@ fun PremiumScreen(
 fun PremiumPreview() {
     AstralVPNTheme(darkTheme = true) {
         PremiumScreen(
-            uiState = PremiumUiState.MonthPlan,
+            uiState = PremiumUiState.YearPlan,
             onPlanSelected = { }
         )
     }

@@ -5,6 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.uncannyvalley.astralvpn.presentation.auth.login.LoginScreen
 import com.uncannyvalley.astralvpn.presentation.auth.login.LoginViewModel
 import com.uncannyvalley.astralvpn.presentation.auth.register.CheckEmailScreen
@@ -19,6 +20,8 @@ import com.uncannyvalley.astralvpn.presentation.auth.register.VerificationViewMo
 import com.uncannyvalley.astralvpn.presentation.home.HomeScreen
 import com.uncannyvalley.astralvpn.presentation.home.HomeUiState
 import com.uncannyvalley.astralvpn.presentation.home.HomeViewModel
+import com.uncannyvalley.astralvpn.presentation.premium.PremiumScreen
+import com.uncannyvalley.astralvpn.presentation.premium.PremiumViewModel
 import com.uncannyvalley.astralvpn.presentation.profile.ProfileViewModel
 import com.uncannyvalley.astralvpn.presentation.screen.AppIconScreen
 import com.uncannyvalley.astralvpn.presentation.screen.HelpScreen
@@ -41,6 +44,7 @@ sealed class Screen(val route: String) {
     object CheckEmailScreen : Screen("check_email?email={email}") {
         fun createRoute(email: String) = "check_email?email=$email"
     }
+    object PremiumScreen : Screen("premium")
 }
 
 @Composable
@@ -214,5 +218,15 @@ fun CheckEmailRoute(
     CheckEmailScreen(
         email = email,
         onBack = onBack
+    )
+}
+
+@Composable
+fun PremiumRoute(
+    viewModel: PremiumViewModel = viewModel()
+) {
+    PremiumScreen(
+        uiState = viewModel.uiState.value,
+        onPlanSelected = viewModel::onPlanSelected
     )
 }
