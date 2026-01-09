@@ -94,4 +94,6 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth.ktx)
     implementation(libs.kotlinx.coroutines.play.services)
+
+    implementation(libs.datastore.preferences)
 }
