@@ -24,9 +24,6 @@ This project is currently in active development. Core features are being impleme
     <td><img src="media/settings_dark.png" alt="Settings Screen (Dark)" width="200"/></td>
     <td><img src="media/profile.png" alt="Settings Screen (Dark)" width="200"/></td>    
   </tr>
-  <tr>
-    <td colspan="2" align="center">Dark Theme</td>
-  </tr>
 </table>
 
 ## Tech stach
