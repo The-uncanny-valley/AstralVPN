@@ -19,8 +19,10 @@ This project is currently in active development. Core features are being impleme
 
 <table>
   <tr>
+    <td><img src="media/register.png" alt="Settings Screen (Dark)" width="200"/></td>
     <td><img src="media/home_dark.png" alt="Home Screen (Dark)" width="200"/></td>
     <td><img src="media/settings_dark.png" alt="Settings Screen (Dark)" width="200"/></td>
+    <td><img src="media/profile.png" alt="Settings Screen (Dark)" width="200"/></td>    
   </tr>
   <tr>
     <td colspan="2" align="center">Dark Theme</td>
