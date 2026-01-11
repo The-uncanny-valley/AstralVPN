@@ -181,7 +181,8 @@ fun LoginScreen(
                             ),
                             contentDescription = if (passwordVisible) "Hide password"
                             else "Show password",
-                            tint = MaterialTheme.colorScheme.primary
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(end = 12.dp)
                         )
                     }
                 }
