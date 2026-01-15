@@ -97,33 +97,33 @@ fun LoginScreen(
 
             Spacer(modifier = Modifier.height(32.dp))
 
-                OutlinedTextField(
-                    value = uiState.email,
-                    onValueChange = { viewModel.onEmailChanged(it) },
-                    label = {
-                        Text(
-                            text = stringResource(R.string.login_email_label),
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
+            OutlinedTextField(
+                value = uiState.email,
+                onValueChange = { viewModel.onEmailChanged(it) },
+                label = {
+                    Text(
+                        text = stringResource(R.string.login_email_label),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                },
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
 
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Email,
-                        imeAction = ImeAction.Next
-                    ),
-                    singleLine = true,
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Next
+                ),
+                singleLine = true,
 
-                    leadingIcon = {
-                        Icon(
-                            painter = painterResource(R.drawable.ic_email),
-                            contentDescription = null,
-                            tint = Color.Unspecified,
-                            modifier = Modifier.padding(start = 12.dp)
-                        )
-                    }
-                )
+                leadingIcon = {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_email),
+                        contentDescription = null,
+                        tint = Color.Unspecified,
+                        modifier = Modifier.padding(start = 12.dp)
+                    )
+                }
+            )
 
             if (uiState.email.isNotBlank() && !uiState.isEmailValid) {
                 Spacer(modifier = Modifier.height(4.dp))
