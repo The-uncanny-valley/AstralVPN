@@ -27,6 +27,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -38,6 +39,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.uncannyvalley.astralvpn.R
@@ -96,6 +99,14 @@ fun MainButton(
         is HomeUiState.Error -> R.drawable.ic_error
     }
 
+    val text = when (uiState) {
+        is HomeUiState.Normal -> ""
+        is HomeUiState.Connected -> stringResource(R.string.home_connected)
+        is HomeUiState.Connecting -> stringResource(R.string.home_connecting)
+        is HomeUiState.NoInternet -> stringResource(R.string.home_no_internet)
+        is HomeUiState.Error -> stringResource(R.string.home_error) + " " + uiState.message
+    }
+
     val isLoading = uiState is HomeUiState.Connecting
 
     val rotation by rememberInfiniteTransition(
@@ -119,32 +130,46 @@ fun MainButton(
 
     val painter = painterResource(id = icon)
 
-    Box(
-        modifier = Modifier
-            .fillMaxWidth(0.4f)
-            .aspectRatio(1f)
-            .graphicsLayer(
-                scaleX = if (pressed) 0.97f else 1f,
-                scaleY = if (pressed) 0.97f else 1f,
-                rotationZ = if (isLoading) rotation else 0f
-            )
-            .clickable(
-                enabled = !isLoading,
-                interactionSource = interactionSource,
-                indication = ripple(
-                    bounded = false,
-                    radius = 90.dp,
-                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.1f)
-                ),
-                onClick = onClick
-            ),
-        contentAlignment = Alignment.Center
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
-            painter = painter,
-            contentDescription = "Main action",
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Inside
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(0.4f)
+                .aspectRatio(1f)
+                .graphicsLayer(
+                    scaleX = if (pressed) 0.97f else 1f,
+                    scaleY = if (pressed) 0.97f else 1f,
+                    rotationZ = if (isLoading) rotation else 0f
+                )
+                .clickable(
+                    enabled = !isLoading,
+                    interactionSource = interactionSource,
+                    indication = ripple(
+                        bounded = false,
+                        radius = 90.dp,
+                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.1f)
+                    ),
+                    onClick = onClick
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+            Image(
+                painter = painter,
+                contentDescription = "Main action",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Inside
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(
+            text = text,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground,
+            textAlign = TextAlign.Center
         )
     }
 }
