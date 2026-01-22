@@ -196,7 +196,7 @@ fun RegisterScreen(
 
                 leadingIcon = {
                     Icon(
-                        painter = painterResource(R.drawable.ic_password),
+                        painter = painterResource(R.drawable.ic_custom_password),
                         contentDescription = null,
                         tint = Color.Unspecified,
                         modifier = Modifier.padding(start = 12.dp)
