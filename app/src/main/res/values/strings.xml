@@ -11,6 +11,13 @@
     <string name="help">Help</string>
     <string name="rate_us">Rate us</string>
 
+    <!-- Home Screen -->
+    <string name="home_tap_to_connect">Tap to connect</string>
+    <string name="home_connected">Connected</string>
+    <string name="home_connecting">Connecting...</string>
+    <string name="home_no_internet">No Internet</string>
+    <string name="home_error">Error:</string>
+
     <!-- Help Screen -->
     <string name="help_title">Help</string>
     <string name="help_text">A VPN, or Virtual Private Network, is a service that creates a secure, encrypted connection over the internet to protect your data and privacy. It works by routing your internet traffic through a remote server, which masks your IP address and encrypts your data, making your online activity anonymous and more secure, especially on public Wi-Fi. This also allows you to bypass geographic restrictions and safely access private networks remotely. </string>
@@ -40,6 +47,7 @@
     <string name="login_email_label" translatable="false">Email</string>
     <string name="login_email_error">Enter a valid email address</string>
     <string name="login_password_label">Password</string>
+    <string name="login_forgot_password">Forgot password</string>
     <string name="login_btn">Log in</string>
     <string name="login_register">Create an account</string>
     <string name="login_skip">Skip</string>

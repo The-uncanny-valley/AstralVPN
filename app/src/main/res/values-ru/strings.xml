@@ -8,6 +8,7 @@
     <string name="language">Язык</string>
     <string name="help">Помощь</string>
     <string name="rate_us">Оцените приложение</string>
+    <string name="home_error">Ошибка:</string>
     <string name="help_title">Помощь</string>
     <string name="help_text">VPN (от англ. Virtual Private Network) шифрует интернет-трафик и скрывает ваши личные данные.\n\nБезопасное соединение маскирует ваш IP-адрес, перенаправляя его через специально настроенный удаленный сервер. В результате Ваш интернет-провайдер и другие лица не видят, какие сайты вы посещаете и какие данные вы отправляете или получаете.\n\nВ чем преимущества VPN? Безопасное соединение маскирует ваш интернет-трафик и не дает посторонним доступ к нему.\n\nНадежное шифрование. Безопасное соединение скрывает ваши действия в интернете даже в публичных сетях.\n\nМаскировка местоположения. Поскольку данные о местоположении поступают с сервера в другой стране</string>
     <string name="icon_title">Значок приложения</string>
@@ -21,6 +22,7 @@
     <string name="register_title">Войти в существующий аккаунт</string>
     <string name="register_log_in">У меня уже есть аккаунт</string>
     <string name="register_skip">Продолжить без регистрации</string>
+    <string name="login_forgot_password">Не помню пароль</string>
     <string name="login_btn">Войти</string>
     <string name="login_register">Зарегистрироваться</string>
     <string name="login_skip">Продолжить без регистрации</string>
@@ -46,4 +48,8 @@
     <string name="premium_enter_promo_code">Ввести промо-код</string>
     <string name="premium_terms_and_conditions">Условия пользования</string>
     <string name="premium_ic_chosen">выбран</string>
+    <string name="home_tap_to_connect">Нажмите для подключения</string>
+    <string name="home_connected">Подключено</string>
+    <string name="home_connecting">Подключение...</string>
+    <string name="home_no_internet">Нет интернета</string>
 </resources>

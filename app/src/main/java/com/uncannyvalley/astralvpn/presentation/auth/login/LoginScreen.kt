@@ -97,33 +97,33 @@ fun LoginScreen(
 
             Spacer(modifier = Modifier.height(32.dp))
 
-                OutlinedTextField(
-                    value = uiState.email,
-                    onValueChange = { viewModel.onEmailChanged(it) },
-                    label = {
-                        Text(
-                            text = stringResource(R.string.login_email_label),
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
+            OutlinedTextField(
+                value = uiState.email,
+                onValueChange = { viewModel.onEmailChanged(it) },
+                label = {
+                    Text(
+                        text = stringResource(R.string.login_email_label),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                },
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
 
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Email,
-                        imeAction = ImeAction.Next
-                    ),
-                    singleLine = true,
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Next
+                ),
+                singleLine = true,
 
-                    leadingIcon = {
-                        Icon(
-                            painter = painterResource(R.drawable.ic_email),
-                            contentDescription = null,
-                            tint = Color.Unspecified,
-                            modifier = Modifier.padding(start = 12.dp)
-                        )
-                    }
-                )
+                leadingIcon = {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_email),
+                        contentDescription = null,
+                        tint = Color.Unspecified,
+                        modifier = Modifier.padding(start = 12.dp)
+                    )
+                }
+            )
 
             if (uiState.email.isNotBlank() && !uiState.isEmailValid) {
                 Spacer(modifier = Modifier.height(4.dp))
@@ -163,7 +163,7 @@ fun LoginScreen(
 
                 leadingIcon = {
                     Icon(
-                        painter = painterResource(R.drawable.ic_password),
+                        painter = painterResource(R.drawable.ic_custom_password),
                         contentDescription = null,
                         tint = Color.Unspecified,
                         modifier = Modifier.padding(start = 12.dp)
@@ -181,11 +181,22 @@ fun LoginScreen(
                             ),
                             contentDescription = if (passwordVisible) "Hide password"
                             else "Show password",
-                            tint = MaterialTheme.colorScheme.primary
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(end = 12.dp)
                         )
                     }
                 }
             )
+
+            uiState.errorMessage?.let { error ->
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = error,
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 10.sp),
+                    modifier = Modifier.padding(horizontal = 4.dp)
+                )
+            }
 
             Spacer(modifier = Modifier.height(28.dp))
 
@@ -196,6 +207,11 @@ fun LoginScreen(
             )
 
             Spacer(modifier = Modifier.height(16.dp))
+
+            CustomLineButton(
+                text = stringResource(R.string.login_forgot_password),
+                onClick = { /* TODO: add click listener */ }
+            )
 
             CustomLineButton(
                 text = stringResource(R.string.login_register),
