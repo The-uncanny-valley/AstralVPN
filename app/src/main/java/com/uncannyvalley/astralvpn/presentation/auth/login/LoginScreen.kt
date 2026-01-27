@@ -199,6 +199,11 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             CustomLineButton(
+                text = stringResource(R.string.login_forgot_password),
+                onClick = { /* TODO: add click listener */ }
+            )
+
+            CustomLineButton(
                 text = stringResource(R.string.login_register),
                 onClick = onRegisterClick
             )
