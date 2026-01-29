@@ -1,11 +1,14 @@
-package com.uncannyvalley.astralvpn.presentation.screen
+package com.uncannyvalley.astralvpn.presentation.icon
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,15 +16,22 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,16 +40,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.uncannyvalley.astralvpn.R
-import com.uncannyvalley.astralvpn.presentation.components.LanguageButton
 import com.uncannyvalley.astralvpn.presentation.theme.AstralVPNTheme
 
 @Composable
 fun AppIconScreen(
+    viewModel: AppIconViewModel = viewModel(),
     onBack: () -> Unit
 ) {
+
+    val iconOptions = viewModel.iconOptions
+    val selectedIcon = viewModel.selectedIconId
 
     Scaffold(
         modifier = Modifier
@@ -103,8 +118,80 @@ fun AppIconScreen(
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onPrimary,
                     )
+
+                    Spacer(modifier = Modifier.height(58.dp))
+
+                    AppIconPicker(
+                        options = iconOptions,
+                        selectedId = selectedIcon,
+                        onSelectedChanged = viewModel::onIconSelected
+                    )
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun AppIconItem(
+    option: AppIconOption,
+    selected: Boolean,
+    onSelect: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+            .selectable(
+                selected = selected,
+                onClick = onSelect,
+                role = Role.RadioButton
+            )
+    ) {
+        Box(
+            modifier = Modifier
+                .size(52.dp)
+                .border(
+                    width = 2.dp,
+                    color = if (selected) MaterialTheme.colorScheme.primary
+                    else MaterialTheme.colorScheme.outline,
+                    shape = RoundedCornerShape(12.dp)
+                )
+                .padding(3.dp)
+        ) {
+            Image(
+                painter = painterResource(option.imageRes),
+                contentDescription = null,
+                contentScale = ContentScale.Fit,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+
+        Spacer(modifier = Modifier.height(6.dp))
+
+        RadioButton(
+            selected = selected,
+            onClick = onSelect
+        )
+    }
+}
+
+@Composable
+fun AppIconPicker(
+    options: List<AppIconOption>,
+    selectedId: String,
+    onSelectedChanged: (String) -> Unit
+) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        modifier = Modifier.selectableGroup()
+    ) {
+        options.forEach { option ->
+            AppIconItem(
+                option = option,
+                selected = option.id == selectedId,
+                onSelect = { onSelectedChanged(option.id) }
+            )
         }
     }
 }
@@ -113,7 +200,7 @@ fun AppIconScreen(
     showBackground = true
 )
 @Composable
-fun LanguageScreenPreview() {
+fun AppIconScreenPreview() {
     AstralVPNTheme(darkTheme = true) {
         AppIconScreen(
             onBack = {}
