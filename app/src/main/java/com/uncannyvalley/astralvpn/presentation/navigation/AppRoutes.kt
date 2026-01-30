@@ -23,7 +23,8 @@ import com.uncannyvalley.astralvpn.presentation.home.HomeViewModel
 import com.uncannyvalley.astralvpn.presentation.premium.PremiumScreen
 import com.uncannyvalley.astralvpn.presentation.premium.PremiumViewModel
 import com.uncannyvalley.astralvpn.presentation.profile.ProfileViewModel
-import com.uncannyvalley.astralvpn.presentation.screen.AppIconScreen
+import com.uncannyvalley.astralvpn.presentation.icon.AppIconScreen
+import com.uncannyvalley.astralvpn.presentation.icon.AppIconViewModel
 import com.uncannyvalley.astralvpn.presentation.screen.HelpScreen
 import com.uncannyvalley.astralvpn.presentation.screen.ProfileScreen
 import com.uncannyvalley.astralvpn.presentation.settings.SettingsScreen
@@ -96,9 +97,10 @@ fun HelpRoute(
 
 @Composable
 fun AppIconRoute(
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    viewModel: AppIconViewModel
 ) {
-    AppIconScreen(onBack = onBack)
+    AppIconScreen(onBack = onBack, viewModel = viewModel)
 }
 
 @Composable
