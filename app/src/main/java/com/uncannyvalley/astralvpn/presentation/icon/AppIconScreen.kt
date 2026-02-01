@@ -178,8 +178,8 @@ fun AppIconItem(
 @Composable
 fun AppIconPicker(
     options: List<AppIconOption>,
-    selectedId: String,
-    onSelectedChanged: (String) -> Unit
+    selectedIcon: AppIcon,
+    onSelectedChanged: (AppIcon) -> Unit
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
@@ -192,8 +192,8 @@ fun AppIconPicker(
         items(options) { option ->
             AppIconItem(
                 option = option,
-                selected = option.id == selectedId,
-                onSelect = { onSelectedChanged(option.id) }
+                selected = option.icon == selectedIcon,
+                onSelect = { onSelectedChanged(option.icon) }
             )
         }
     }
