@@ -98,9 +98,14 @@ fun HelpRoute(
 @Composable
 fun AppIconRoute(
     onBack: () -> Unit,
-    viewModel: AppIconViewModel
+    viewModel: AppIconViewModel = hiltViewModel()
 ) {
-    AppIconScreen(onBack = onBack, viewModel = viewModel)
+    AppIconScreen(
+        iconOptions = viewModel.iconOptions,
+        selectedIcon = viewModel.selectedIcon,
+        onIconSelected = viewModel::onIconSelected,
+        onBack = onBack
+    )
 }
 
 @Composable
