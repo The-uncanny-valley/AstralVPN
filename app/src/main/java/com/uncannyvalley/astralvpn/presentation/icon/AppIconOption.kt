@@ -1,6 +1,8 @@
 package com.uncannyvalley.astralvpn.presentation.icon
 
+import com.uncannyvalley.astralvpn.domain.model.AppIcon
+
 data class AppIconOption(
-    val id: String,
+    val icon: AppIcon,
     val imageRes: Int
 )

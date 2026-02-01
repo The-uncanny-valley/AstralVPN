@@ -6,7 +6,7 @@ import com.uncannyvalley.astralvpn.presentation.icon.AppIconOption
 
 fun AppIcon.toUiModel(): AppIconOption {
     return AppIconOption(
-        id = name,
+        icon = this,
         imageRes = when (this) {
             AppIcon.DEFAULT -> R.drawable.ic_app_default
             AppIcon.LIGHT -> R.drawable.ic_app_light
