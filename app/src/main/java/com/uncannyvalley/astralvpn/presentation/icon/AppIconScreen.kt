@@ -43,18 +43,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.uncannyvalley.astralvpn.R
+import com.uncannyvalley.astralvpn.domain.model.AppIcon
+import com.uncannyvalley.astralvpn.presentation.settings.mapper.toUiModel
 import com.uncannyvalley.astralvpn.presentation.theme.AstralVPNTheme
 
 @Composable
 fun AppIconScreen(
-    viewModel: AppIconViewModel = viewModel(),
+    iconOptions: List<AppIconOption>,
+    selectedIcon: AppIcon,
+    onIconSelected: (AppIcon) -> Unit,
     onBack: () -> Unit
 ) {
-
-    val iconOptions = viewModel.iconOptions
-    val selectedIcon = viewModel.selectedIconId
 
     Scaffold(
         modifier = Modifier
@@ -122,8 +122,8 @@ fun AppIconScreen(
 
                     AppIconPicker(
                         options = iconOptions,
-                        selectedId = selectedIcon,
-                        onSelectedChanged = viewModel::onIconSelected
+                        selectedIcon = selectedIcon,
+                        onSelectedChanged = onIconSelected
                     )
                 }
             }
@@ -206,7 +206,10 @@ fun AppIconPicker(
 fun AppIconScreenPreview() {
     AstralVPNTheme(darkTheme = true) {
         AppIconScreen(
-            onBack = {}
+            onBack = {},
+            iconOptions = AppIcon.entries.map { it.toUiModel() },
+            selectedIcon = AppIcon.DEFAULT,
+            onIconSelected = {}
         )
     }
 }
