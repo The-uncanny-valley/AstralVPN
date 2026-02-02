@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">AstralVPN</string>
+    <string name="app_name_calc">Calculator</string>
+    <string name="app_name_clock">Clock</string>
 
     <!-- Settings Screen -->
     <string name="profile">Profile</string>
