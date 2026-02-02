@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name_calc">Калькулятор</string>
+    <string name="app_name_clock">Часы</string>
     <string name="profile">Профиль</string>
     <string name="get_premium">Премиум-версия</string>
     <string name="split_tunneling">Раздельное туннелирование</string>
