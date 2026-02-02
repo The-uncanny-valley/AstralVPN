@@ -34,7 +34,7 @@ class AppIconManagerImpl @Inject constructor(
             pm.setComponentEnabledSetting(
                 ComponentName(packageName, alias),
                 newState,
-                0
+                PackageManager.DONT_KILL_APP
             )
 
             Log.d("AppIconManager", "Alias $alias set to $newState")
