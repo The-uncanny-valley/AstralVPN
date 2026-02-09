@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
@@ -29,6 +30,7 @@ import com.uncannyvalley.astralvpn.R.string.theme
 import com.uncannyvalley.astralvpn.presentation.home.BottomNavBar
 import com.uncannyvalley.astralvpn.presentation.navigation.Screen
 import com.uncannyvalley.astralvpn.presentation.theme.AstralVPNTheme
+import com.uncannyvalley.astralvpn.presentation.theme.LightBackgroundGradient
 
 @Composable
 fun SettingsScreen(
@@ -38,6 +40,9 @@ fun SettingsScreen(
     onNavigateAppIcon: () -> Unit,
     onNavigateProfile: () -> Unit
 ) {
+    val isDarkTheme =
+        MaterialTheme.colorScheme.background.luminance() < 0.5f
+
     Scaffold(
         bottomBar = {
             BottomNavBar(
@@ -54,9 +59,18 @@ fun SettingsScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .paint(
-                    painterResource(id = R.drawable.background_stars),
-                    contentScale = ContentScale.FillHeight
+                .then(
+                    if (isDarkTheme) {
+                        Modifier
+                            .background(MaterialTheme.colorScheme.background)
+                            .paint(
+                                painterResource(id = R.drawable.background_stars),
+                                contentScale = ContentScale.FillHeight
+                            )
+                    } else {
+                        Modifier
+                            .background(LightBackgroundGradient)
+                    }
                 ),
             contentAlignment = Alignment.Center
         ) {

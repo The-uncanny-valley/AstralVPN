@@ -29,6 +29,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
@@ -40,6 +41,7 @@ import com.uncannyvalley.astralvpn.R
 import com.uncannyvalley.astralvpn.presentation.components.PremiumButton
 import com.uncannyvalley.astralvpn.presentation.profile.ProfileUiState
 import com.uncannyvalley.astralvpn.presentation.theme.AstralVPNTheme
+import com.uncannyvalley.astralvpn.presentation.theme.LightBackgroundGradient
 
 @Composable
 fun ProfileScreen(
@@ -67,6 +69,9 @@ private fun ProfileLoadedScreen(
     onGetPremiumClick: () -> Unit,
     onBack: () -> Unit
 ) {
+    val isDarkTheme =
+        MaterialTheme.colorScheme.background.luminance() < 0.5f
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -75,9 +80,18 @@ private fun ProfileLoadedScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .paint(
-                    painterResource(id = R.drawable.background_stars),
-                    contentScale = ContentScale.FillHeight
+                .then(
+                    if (isDarkTheme) {
+                        Modifier
+                            .background(MaterialTheme.colorScheme.background)
+                            .paint(
+                                painterResource(id = R.drawable.background_stars),
+                                contentScale = ContentScale.FillHeight
+                            )
+                    } else {
+                        Modifier
+                            .background(LightBackgroundGradient)
+                    }
                 )
                 .padding(padding)
         ) {

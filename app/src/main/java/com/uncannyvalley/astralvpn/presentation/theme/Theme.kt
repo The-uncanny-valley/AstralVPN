@@ -33,7 +33,9 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
-
+    primary = Puce,
+    onBackground = White,
+    onSurface = Puce
 )
 
 @Composable

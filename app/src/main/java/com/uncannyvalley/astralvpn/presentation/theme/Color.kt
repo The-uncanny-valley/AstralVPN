@@ -20,3 +20,6 @@ val LazerScarlet = Color(0xFFFF2929)
 val SteelDust = Color(0xFFBDBDBD)
 val Cyan = Color(0xFF438FFF)
 val Nero = Color(0xFF181818)
+
+val CadetBlue = Color(0xFFB4B9C9)
+val SoftPink = Color(0xFFE4ABBB)

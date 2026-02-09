@@ -37,7 +37,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -46,7 +48,7 @@ import androidx.compose.ui.unit.dp
 import com.uncannyvalley.astralvpn.R
 import com.uncannyvalley.astralvpn.presentation.navigation.Screen
 import com.uncannyvalley.astralvpn.presentation.theme.AstralVPNTheme
-import com.uncannyvalley.astralvpn.presentation.theme.Purple
+import com.uncannyvalley.astralvpn.presentation.theme.LightBackgroundGradient
 
 @Composable
 fun HomeScreen(
@@ -54,6 +56,10 @@ fun HomeScreen(
     onMainButtonClick: () -> Unit,
     onNavigateSettings: () -> Unit
 ) {
+
+    val isDarkTheme =
+        MaterialTheme.colorScheme.background.luminance() < 0.5f
+
     Scaffold(
         bottomBar = {
             BottomNavBar(
@@ -64,16 +70,28 @@ fun HomeScreen(
         },
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-
     ) { padding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .paint(
-                    painterResource(id = R.drawable.background_stars),
-                    contentScale = ContentScale.FillHeight
+                .then(
+                    if (isDarkTheme && uiState !is HomeUiState.Error
+                        && uiState !is HomeUiState.NoInternet
+                    ) {
+                        Modifier
+                            .background(MaterialTheme.colorScheme.background)
+                            .paint(
+                                painterResource(id = R.drawable.background_stars),
+                                contentScale = ContentScale.FillHeight
+                            )
+                    } else if (isDarkTheme) {
+                        Modifier.background(MaterialTheme.colorScheme.background)
+                    } else {
+                        Modifier
+                            .background(LightBackgroundGradient)
+                    }
                 )
+                // commit: feat: show stars only in dark theme and non-error states
                 .padding(padding),
             contentAlignment = Alignment.Center
         ) {
@@ -232,7 +250,8 @@ fun BottomNavItem(
                 .width(42.dp)
                 .height(5.dp)
                 .background(
-                    color = Purple.copy(alpha = if (selected) 1f else 0f),
+                    color = colorResource(R.color.bottom_nav_indicator)
+                        .copy(alpha = if (selected) 1f else 0f),
                     shape = RoundedCornerShape(20.dp)
                 ),
         )

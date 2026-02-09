@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -30,16 +31,28 @@ import com.uncannyvalley.astralvpn.R
 import com.uncannyvalley.astralvpn.presentation.components.CustomLineButton
 import com.uncannyvalley.astralvpn.presentation.components.SubscribeButton
 import com.uncannyvalley.astralvpn.presentation.theme.AstralVPNTheme
+import com.uncannyvalley.astralvpn.presentation.theme.LightBackgroundGradient
 
 @Composable
 fun PremiumScreen(
     uiState: PremiumUiState,
     onPlanSelected: (PremiumUiState) -> Unit
 ) {
+    val isDarkTheme =
+        MaterialTheme.colorScheme.background.luminance() < 0.5f
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+            .then(
+                if (isDarkTheme) {
+                    Modifier
+                        .background(MaterialTheme.colorScheme.background)
+                } else {
+                    Modifier
+                        .background(LightBackgroundGradient)
+                }
+            )
     ) { padding ->
 
         Column(

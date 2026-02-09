@@ -34,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -44,6 +45,7 @@ import com.uncannyvalley.astralvpn.R
 import com.uncannyvalley.astralvpn.domain.model.AppIcon
 import com.uncannyvalley.astralvpn.presentation.settings.mapper.toUiModel
 import com.uncannyvalley.astralvpn.presentation.theme.AstralVPNTheme
+import com.uncannyvalley.astralvpn.presentation.theme.LightBackgroundGradient
 
 @Composable
 fun AppIconScreen(
@@ -52,6 +54,8 @@ fun AppIconScreen(
     onIconSelected: (AppIcon) -> Unit,
     onBack: () -> Unit
 ) {
+    val isDarkTheme =
+        MaterialTheme.colorScheme.background.luminance() < 0.5f
 
     Scaffold(
         modifier = Modifier
@@ -61,9 +65,18 @@ fun AppIconScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .paint(
-                    painterResource(id = R.drawable.background_stars),
-                    contentScale = ContentScale.FillHeight
+                .then(
+                    if (isDarkTheme) {
+                        Modifier
+                            .background(MaterialTheme.colorScheme.background)
+                            .paint(
+                                painterResource(id = R.drawable.background_stars),
+                                contentScale = ContentScale.FillHeight
+                            )
+                    } else {
+                        Modifier
+                            .background(LightBackgroundGradient)
+                    }
                 )
                 .padding(padding) // ?
         ) {
