@@ -223,3 +223,18 @@ fun AppIconScreenPreview() {
         )
     }
 }
+
+@Preview(
+    showBackground = true
+)
+@Composable
+fun AppIconScreenPreview_Light() {
+    AstralVPNTheme(darkTheme = false) {
+        AppIconScreen(
+            onBack = {},
+            iconOptions = AppIcon.entries.map { it.toUiModel() },
+            selectedIcon = AppIcon.DEFAULT,
+            onIconSelected = {}
+        )
+    }
+}

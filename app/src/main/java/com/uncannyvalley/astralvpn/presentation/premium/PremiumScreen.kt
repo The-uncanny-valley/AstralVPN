@@ -185,3 +185,31 @@ fun SubscriptionPlan(
         }
     }
 }
+
+@Preview(
+    name = "Premium Screen - Month",
+    showBackground = true
+)
+@Composable
+fun PremiumPreview() {
+    AstralVPNTheme(darkTheme = true) {
+        PremiumScreen(
+            uiState = PremiumUiState.YearPlan,
+            onPlanSelected = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Premium Screen - Month",
+    showBackground = true
+)
+@Composable
+fun PremiumPreview_Light() {
+    AstralVPNTheme(darkTheme = false) {
+        PremiumScreen(
+            uiState = PremiumUiState.YearPlan,
+            onPlanSelected = { }
+        )
+    }
+}

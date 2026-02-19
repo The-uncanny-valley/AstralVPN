@@ -333,3 +333,18 @@ fun HomeScreenPreview_NoInternet() {
         )
     }
 }
+
+@Preview(
+    name = "Home Screen - NoInternet",
+    showBackground = true
+)
+@Composable
+fun HomeScreenPreview_NoInternet_Dark() {
+    AstralVPNTheme(darkTheme = false) {
+        HomeScreen(
+            uiState = HomeUiState.NoInternet,
+            onMainButtonClick = {},
+            onNavigateSettings = {}
+        )
+    }
+}

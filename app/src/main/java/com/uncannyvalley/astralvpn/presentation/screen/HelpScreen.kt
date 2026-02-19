@@ -133,3 +133,16 @@ fun HelpScreenPreview() {
         )
     }
 }
+
+@Preview(
+    showBackground = true,
+    locale = "ru"
+)
+@Composable
+fun HelpScreenPreview_Light() {
+    AstralVPNTheme(darkTheme = false) {
+        HelpScreen(
+            onBack = {}
+        )
+    }
+}

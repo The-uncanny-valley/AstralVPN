@@ -136,3 +136,19 @@ fun SettingsScreenPreview() {
         )
     }
 }
+
+@Preview(
+    showBackground = true
+)
+@Composable
+fun SettingsScreenPreview_Light() {
+    AstralVPNTheme(darkTheme = false) {
+        SettingsScreen(
+            onBack = {},
+            onNavigateHome = {},
+            onNavigateHelp = {},
+            onNavigateAppIcon = {},
+            onNavigateProfile = {}
+        )
+    }
+}

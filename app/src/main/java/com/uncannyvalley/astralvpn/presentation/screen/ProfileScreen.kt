@@ -241,3 +241,21 @@ fun ProfileScreenPreview() {
         )
     }
 }
+
+@Preview(
+    showBackground = true
+)
+@Composable
+fun ProfileScreenPreview_Light() {
+    AstralVPNTheme(darkTheme = false) {
+        ProfileScreen(
+            onBack = {},
+            onEditButtonClick = {},
+            onGetPremiumClick = {},
+            uiState = ProfileUiState.Loaded(
+                userName = "Ivan Ivanov",
+                isPremium = false
+            ),
+        )
+    }
+}
