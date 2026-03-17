@@ -1,8 +1,8 @@
 package com.uncannyvalley.core.vpn.engine
 
+import com.uncannyvalley.astral.core.domain.model.VpnConfig
+import com.uncannyvalley.astral.core.domain.model.VpnStatus
 import com.uncannyvalley.core.vpn.config.xray.XrayConfigManager
-import com.uncannyvalley.core.vpn.model.VpnConfig
-import com.uncannyvalley.core.vpn.model.VpnStatus
 import kotlinx.coroutines.flow.Flow
 
 class XrayEngine(

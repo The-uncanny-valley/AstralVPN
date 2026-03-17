@@ -1,7 +1,7 @@
 package com.uncannyvalley.core.vpn.engine
 
-import com.uncannyvalley.core.vpn.model.VpnConfig
-import com.uncannyvalley.core.vpn.model.VpnStatus
+import com.uncannyvalley.astral.core.domain.model.VpnConfig
+import com.uncannyvalley.astral.core.domain.model.VpnStatus
 import kotlinx.coroutines.flow.Flow
 
 interface VpnEngine {

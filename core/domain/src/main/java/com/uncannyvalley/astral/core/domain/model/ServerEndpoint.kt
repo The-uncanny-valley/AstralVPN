@@ -1,4 +1,4 @@
-package com.uncannyvalley.core.vpn.model
+package com.uncannyvalley.astral.core.domain.model
 
 data class ServerEndpoint(
     val host: String,
