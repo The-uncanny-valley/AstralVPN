@@ -50,6 +50,8 @@ kotlin {
 }
 
 dependencies {
+    implementation(project(":core:domain")) // temporary
+    implementation(project(":core:vpn")) // temporary
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

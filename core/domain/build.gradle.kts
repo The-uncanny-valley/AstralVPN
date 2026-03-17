@@ -38,6 +38,9 @@ kotlin {
 }
 
 dependencies {
+    implementation(project(":app")) // delete later, because domain must not depend on app
+    implementation(project(":core:vpn")) // delete later
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
