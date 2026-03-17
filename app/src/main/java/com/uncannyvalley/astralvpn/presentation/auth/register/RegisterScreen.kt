@@ -256,11 +256,10 @@ fun RegisterScreen(
 @Composable
 fun TermsAgreementRow(
     checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit,
-    modifier: Modifier = Modifier
+    onCheckedChange: (Boolean) -> Unit
 ) {
     Row(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
             .clickable { onCheckedChange(!checked) },
         verticalAlignment = Alignment.CenterVertically
