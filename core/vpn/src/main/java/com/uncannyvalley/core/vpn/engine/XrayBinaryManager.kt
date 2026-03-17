@@ -1,4 +1,4 @@
-package com.uncannyvalley.astralvpn.data.local
+package com.uncannyvalley.core.vpn.engine
 
 import android.content.Context
 import kotlinx.coroutines.Dispatchers
