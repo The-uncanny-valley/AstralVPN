@@ -1,4 +1,4 @@
-package com.uncannyvalley.astralvpn.domain.model
+package com.uncannyvalley.core.vpn.model
 
 import java.time.Instant
 
