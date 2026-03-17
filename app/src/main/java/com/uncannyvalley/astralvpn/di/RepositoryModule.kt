@@ -19,17 +19,18 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
 
-    companion object {
-        @Provides
-        @Singleton
-        fun provideVpnRepository(
-            vpnConfigDao: VpnConfigDao,
-            vpnServiceController: VpnServiceController
-        ): VpnRepository {
-            return VpnRepositoryImpl(
-                vpnConfigDao = vpnConfigDao
-            )
-        }
+//    companion object {
+//        @Provides
+//        @Singleton
+//        fun provideVpnRepository(
+//            vpnConfigDao: VpnConfigDao,
+//            vpnServiceController: VpnServiceController
+//        ): VpnRepository {
+//            return VpnRepositoryImpl(
+//                vpnConfigDao = vpnConfigDao,
+//                engineFactory = TODO()
+//            )
+//        }
 
         @Provides
         @Singleton
