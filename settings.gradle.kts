@@ -26,3 +26,4 @@ rootProject.name = "AstralVPN"
 include(":app")
 include(":core:vpn")
 include(":core:data")
+include(":core:domain")
