@@ -51,7 +51,7 @@ fun SettingsRow(
         Spacer(modifier = Modifier.weight(1f))
 
         Icon(
-            painter = painterResource(com.uncannyvalley.astralvpn.R.drawable.arrow),
+            painter = painterResource(com.uncannyvalley.astralvpn.R.drawable.ic_arrow),
             contentDescription = null,
             tint = Color.Unspecified,
             modifier = Modifier.size(12.dp)
