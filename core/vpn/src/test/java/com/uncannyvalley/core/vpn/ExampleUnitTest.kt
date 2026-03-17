@@ -1,4 +1,4 @@
-package com.uncannyvalley.astralvpn.core
+package com.uncannyvalley.core.vpn
 
 import org.junit.Test
 

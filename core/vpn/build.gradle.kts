@@ -7,8 +7,10 @@ plugins {
 }
 
 android {
-    namespace = "com.uncannyvalley.astralvpn.core"
-    compileSdk = 36
+    namespace = "com.uncannyvalley.core.vpn"
+    compileSdk {
+        version = release(36)
+    }
 
     defaultConfig {
         minSdk = 28

@@ -1,4 +1,4 @@
-package com.uncannyvalley.astralvpn.core
+package com.uncannyvalley.core.vpn
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.uncannyvalley.astralvpn.core.test", appContext.packageName)
+        assertEquals("com.uncannyvalley.core.vpn.test", appContext.packageName)
     }
 }

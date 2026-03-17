@@ -24,4 +24,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "AstralVPN"
 include(":app")
-include(":core")
+include(":core:vpn")
