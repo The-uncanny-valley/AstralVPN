@@ -14,6 +14,7 @@ import com.uncannyvalley.astralvpn.domain.model.VpnConfig
 import com.uncannyvalley.astralvpn.domain.usecase.ConnectVpnUseCase
 import com.uncannyvalley.astralvpn.domain.usecase.DisconnectVpnUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -56,21 +57,26 @@ class HomeViewModel @Inject constructor(
 
     fun onConnectClicked() {
         viewModelScope.launch {
-            if (!connectivity.isOnline()) {
-                _uiState.value = HomeUiState.NoInternet
-                return@launch
-            }
-
             _uiState.value = HomeUiState.Connecting
 
-            val entity = vpnConfigDao.getById("default")
-            val config = entity?.toDomain() ?: return@launch run {
-                _uiState.value = HomeUiState.Error("Missing VPN config")
-            }
+            delay(5000)
 
-            connectVpnUseCase(config)
-                .onSuccess { _uiState.value = HomeUiState.Connected }
-                .onFailure { _uiState.value = HomeUiState.Error(it.message ?: "Failed") }
+            _uiState.value = HomeUiState.Connected
+//            if (!connectivity.isOnline()) {
+//                _uiState.value = HomeUiState.NoInternet
+//                return@launch
+//            }
+//
+//            _uiState.value = HomeUiState.Connecting
+//
+//            val entity = vpnConfigDao.getById("default")
+//            val config = entity?.toDomain() ?: return@launch run {
+//                _uiState.value = HomeUiState.Error("Missing VPN config")
+//            }
+//
+//            connectVpnUseCase(config)
+//                .onSuccess { _uiState.value = HomeUiState.Connected }
+//                .onFailure { _uiState.value = HomeUiState.Error(it.message ?: "Failed") }
         }
     }
 
