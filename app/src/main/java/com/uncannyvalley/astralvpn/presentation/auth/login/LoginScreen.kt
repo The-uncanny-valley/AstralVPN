@@ -62,8 +62,10 @@ fun LoginScreen(
     LaunchedEffect(viewModel.events) {
         viewModel.events.collect { event ->
             when (event) {
-                LoginEvent.Success -> { /* unused for now */ }
                 LoginEvent.Success -> onLoginSuccess()
+//                is LoginEvent.Error -> {
+//                    // show snackbar or toast later
+//                }
             }
         }
     }
