@@ -1,19 +1,19 @@
-package com.uncannyvalley.astralvpn.data.repository
+package com.uncannyvalley.astral.core.domain
 
+import com.uncannyvalley.astral.core.domain.model.VpnStatus
 import com.uncannyvalley.astralvpn.data.dao.VpnConfigDao
 import com.uncannyvalley.astralvpn.domain.model.ConfigId
-import com.uncannyvalley.astralvpn.domain.model.VpnConfig
-import com.uncannyvalley.astralvpn.domain.model.VpnStatus
 import com.uncannyvalley.astralvpn.domain.repository.VpnRepository
+import com.uncannyvalley.core.vpn.engine.VpnEngineFactory
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-class VpnRepositoryImpl @Inject constructor(
-    private val vpnConfigDao: VpnConfigDao
+class VpnRepositoryImpl(
+    private val vpnConfigDao: VpnConfigDao,
+    private val engineFactory: VpnEngineFactory
 ) : VpnRepository {
 
-    override suspend fun connect(config: VpnConfig): Result<Unit> {
-        TODO("Not yet implemented") // // use Xray launcher later
+    override suspend fun connect(config: com.uncannyvalley.astralvpn.domain.model.VpnConfig): Result<Unit> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun disconnect(): Result<Unit> {
